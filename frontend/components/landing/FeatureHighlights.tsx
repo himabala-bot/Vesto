@@ -1,0 +1,208 @@
+'use client';
+
+import React from 'react';
+import { Card } from '@/components/ui/Card';
+import { Badge } from '@/components/ui/Badge';
+import {
+  ShieldAlert,
+  PieChart,
+  Target,
+  RefreshCw,
+  TrendingUp,
+  Zap,
+  Check,
+  ChevronDown,
+} from 'lucide-react';
+
+export function FeatureHighlights() {
+  const features = [
+    {
+      icon: ShieldAlert,
+      color: 'text-emerald-400',
+      bg: 'bg-emerald-500/10',
+      title: 'Safe to Spend Engine',
+      description:
+        'Know down to the dollar what you can safely spend today without touching committed bills or your emergency fund.',
+    },
+    {
+      icon: RefreshCw,
+      color: 'text-indigo-400',
+      bg: 'bg-indigo-500/10',
+      title: 'Recurring Bill Radar',
+      description:
+        'Tracks upcoming subscriptions and fixed bills automatically, with quick one-click payment logging.',
+    },
+    {
+      icon: Target,
+      color: 'text-cyan-400',
+      bg: 'bg-cyan-500/10',
+      title: 'Milestone Savings Goals',
+      description:
+        'Set targets for vacations, down payments, or emergency reserves. Watch progress bars climb with instant deposits.',
+    },
+    {
+      icon: PieChart,
+      color: 'text-amber-400',
+      bg: 'bg-amber-500/10',
+      title: 'Category Budgets',
+      description:
+        'Set custom monthly thresholds for groceries, dining, and shopping. Get proactive warnings before exceeding limits.',
+    },
+    {
+      icon: TrendingUp,
+      color: 'text-rose-400',
+      bg: 'bg-rose-500/10',
+      title: 'Historical Trends & Velocity',
+      description:
+        'Compare your day-by-day spending velocity against last month to catch spending spikes early in the cycle.',
+    },
+    {
+      icon: Zap,
+      color: 'text-purple-400',
+      bg: 'bg-purple-500/10',
+      title: 'Total Balance & Net Cashflow',
+      description:
+        'Shows real lifetime cumulative balance and net savings rate across all past and active months.',
+    },
+  ];
+
+  const faqs = [
+    {
+      q: 'How is Safe to Spend calculated in Vesto?',
+      a: 'Safe to Spend = (Actual Monthly Income or Target Baseline) minus (Committed Recurring Bills) minus (Monthly Savings Targets) minus (Discretionary Spent so far), divided by remaining days in the month.',
+    },
+    {
+      q: 'Do I get fake or placeholder financial data when I sign up?',
+      a: 'Never. Vesto starts completely clean with intuitive empty states and onboarding prompts. Every metric and chart comes directly from your real database records.',
+    },
+    {
+      q: 'Can I track custom categories and change currency?',
+      a: 'Yes! Vesto supports USD ($), EUR (€), GBP (£), INR (₹), CAD, AUD, and custom categories with customizable color accents.',
+    },
+    {
+      q: 'Can I copy budgets from month to month?',
+      a: 'Yes! On the Budgets page, simply click "Copy from Previous Month" to replicate all category limits with one click.',
+    },
+  ];
+
+  return (
+    <div id="features" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-24">
+      {/* Features Grid */}
+      <div>
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <Badge variant="neutral" className="mb-2">
+            Engineered for Simplicity
+          </Badge>
+          <h2 className="text-3xl font-bold tracking-tight text-white">
+            Everything you need. Nothing you don’t.
+          </h2>
+          <p className="mt-2 text-sm text-slate-400">
+            No complex accounting spreadsheets. Just crystal-clear financial control.
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {features.map((f, i) => {
+            const Icon = f.icon;
+            return (
+              <Card key={i} className="p-6 bg-slate-900/60 border-slate-800 hover:border-slate-700 transition-all">
+                <div className={`flex h-11 w-11 items-center justify-center rounded-xl ${f.bg} ${f.color} mb-4`}>
+                  <Icon className="h-5 w-5" />
+                </div>
+                <h3 className="text-base font-semibold text-slate-100">{f.title}</h3>
+                <p className="mt-2 text-xs text-slate-400 leading-relaxed">{f.description}</p>
+              </Card>
+            );
+          })}
+        </div>
+      </div>
+
+      {/* How it works */}
+      <div id="how-it-works" className="rounded-3xl border border-slate-800 bg-slate-900/40 p-8 sm:p-12">
+        <div className="text-center max-w-xl mx-auto mb-10">
+          <Badge variant="success" className="mb-2">
+            3 Simple Steps
+          </Badge>
+          <h2 className="text-2xl sm:text-3xl font-bold text-white">How Vesto Works</h2>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="space-y-3 text-center sm:text-left">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-800 text-emerald-400 font-bold mx-auto sm:mx-0">
+              1
+            </div>
+            <h4 className="text-sm font-semibold text-slate-100">Add Income & Fixed Bills</h4>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Log your salary and recurring commitments (Rent, Utilities, Subscriptions).
+            </p>
+          </div>
+
+          <div className="space-y-3 text-center sm:text-left">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-800 text-emerald-400 font-bold mx-auto sm:mx-0">
+              2
+            </div>
+            <h4 className="text-sm font-semibold text-slate-100">Set Savings Target</h4>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Define your monthly savings goals. Vesto locks this amount away from your daily pool.
+            </p>
+          </div>
+
+          <div className="space-y-3 text-center sm:text-left">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-slate-800 text-emerald-400 font-bold mx-auto sm:mx-0">
+              3
+            </div>
+            <h4 className="text-sm font-semibold text-slate-100">Check Your Daily Safe Limit</h4>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Open Vesto anytime to see exactly what you can spend today with zero financial stress.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      {/* FAQ */}
+      <div id="faq" className="max-w-3xl mx-auto">
+        <div className="text-center mb-10">
+          <h2 className="text-2xl sm:text-3xl font-bold text-white">Frequently Asked Questions</h2>
+        </div>
+
+        <div className="space-y-4">
+          {faqs.map((item, i) => (
+            <Card key={i} className="p-5 bg-slate-900/80 border-slate-800">
+              <h4 className="text-sm font-semibold text-slate-100 flex items-center justify-between">
+                <span>{item.q}</span>
+              </h4>
+              <p className="mt-2 text-xs text-slate-400 leading-relaxed">{item.a}</p>
+            </Card>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export function LandingFooter() {
+  return (
+    <footer className="border-t border-slate-800/80 bg-slate-950 py-12 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+        <div className="flex items-center gap-2">
+          <div className="flex h-6 w-6 items-center justify-center rounded-lg bg-emerald-500 text-slate-950 font-bold text-xs">
+            V
+          </div>
+          <span className="font-bold text-slate-300">VESTO</span>
+          <span>© {new Date().getFullYear()} Vesto Financial. All rights reserved.</span>
+        </div>
+        <div className="flex items-center gap-6">
+          <a href="#calculator" className="hover:text-slate-300 transition-colors">
+            Calculator
+          </a>
+          <a href="#features" className="hover:text-slate-300 transition-colors">
+            Features
+          </a>
+          <a href="#faq" className="hover:text-slate-300 transition-colors">
+            FAQ
+          </a>
+        </div>
+      </div>
+    </footer>
+  );
+}
