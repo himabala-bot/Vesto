@@ -116,7 +116,7 @@ export function AddTransactionModal({
     >
       <form onSubmit={handleSubmit} className="space-y-4">
         {/* Type Toggle */}
-        <div className="grid grid-cols-2 gap-2 rounded-xl bg-slate-950/80 p-1 border border-slate-800">
+        <div className="grid grid-cols-2 gap-2 rounded-xl bg-[#0b0b10] p-1 border border-[#22222e]">
           <button
             type="button"
             onClick={() => {
@@ -139,7 +139,7 @@ export function AddTransactionModal({
             }}
             className={`py-2 text-xs font-semibold rounded-lg transition-all ${
               type === 'income'
-                ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 shadow-sm'
+                ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-sm'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -206,7 +206,7 @@ export function AddTransactionModal({
           <label className="block text-xs font-medium text-slate-300 mb-1.5">Notes (Optional)</label>
           <textarea
             rows={2}
-            className="w-full rounded-xl border border-slate-800 bg-slate-950/70 px-3.5 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-1 focus:ring-emerald-500 transition-all resize-none"
+            className="w-full rounded-xl border border-[#22222e] bg-[#0d0d13] px-3.5 py-2 text-xs text-slate-100 placeholder:text-slate-500 focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500/40 transition-all resize-none"
             placeholder="Add any extra context..."
             value={notes}
             onChange={(e) => setNotes(e.target.value)}
@@ -214,11 +214,11 @@ export function AddTransactionModal({
         </div>
 
         {/* Action Buttons */}
-        <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-800/80">
+        <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#22222e]">
           <Button type="button" variant="outline" size="sm" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" variant="emerald" size="sm" isLoading={isLoading}>
+          <Button type="submit" variant="purple" size="sm" isLoading={isLoading}>
             {editTransaction ? 'Save Changes' : 'Record Transaction'}
           </Button>
         </div>

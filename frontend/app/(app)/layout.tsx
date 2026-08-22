@@ -37,7 +37,7 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           triggerRefresh,
         }}
       >
-        <div className="flex min-h-screen bg-slate-950 text-slate-100">
+        <div className="flex min-h-screen bg-[#08080c] text-slate-100">
           <AppSidebar />
           <div className="flex flex-1 flex-col min-w-0 overflow-x-hidden">
             <AppHeader onOpenAddTransaction={() => setIsAddTxOpen(true)} />

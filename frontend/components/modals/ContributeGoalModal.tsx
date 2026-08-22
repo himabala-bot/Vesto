@@ -88,7 +88,7 @@ export function ContributeGoalModal({
             onChange={(e) => setAmount(e.target.value)}
             required
             autoFocus
-            className="text-lg font-semibold text-emerald-400"
+            className="text-lg font-semibold text-purple-300"
           />
         </div>
 
@@ -107,18 +107,18 @@ export function ContributeGoalModal({
             id="logTx"
             checked={logTransaction}
             onChange={(e) => setLogTransaction(e.target.checked)}
-            className="h-4 w-4 rounded border-slate-700 bg-slate-900 text-emerald-500 focus:ring-emerald-500"
+            className="h-4 w-4 rounded border-[#22222e] bg-[#0d0d13] text-purple-500 focus:ring-purple-500"
           />
           <label htmlFor="logTx" className="text-xs text-slate-300 cursor-pointer select-none">
             Also record as an expense transaction in your monthly spending ledger
           </label>
         </div>
 
-        <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-800/80">
+        <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#22222e]">
           <Button type="button" variant="outline" size="sm" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" variant="emerald" size="sm" isLoading={isLoading}>
+          <Button type="submit" variant="purple" size="sm" isLoading={isLoading}>
             Deposit Funds
           </Button>
         </div>

@@ -83,7 +83,7 @@ export default function GoalsPage() {
         </div>
 
         <Button
-          variant="emerald"
+          variant="purple"
           size="sm"
           onClick={() => {
             setEditingGoal(null);
@@ -97,15 +97,15 @@ export default function GoalsPage() {
 
       {/* Summary KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="p-5 bg-slate-900/80 border-slate-800">
+        <Card className="p-5 bg-[#121218] border-[#22222e]">
           <span className="text-xs text-slate-400">Total Funds Saved</span>
-          <div className="text-2xl font-bold text-emerald-400 mt-2 tabular-nums">
+          <div className="text-2xl font-bold text-purple-300 mt-2 tabular-nums">
             {formatCurrency(totalSaved, currencySymbol)}
           </div>
           <p className="text-[11px] text-slate-500 mt-1">Across all active goals</p>
         </Card>
 
-        <Card className="p-5 bg-slate-900/80 border-slate-800">
+        <Card className="p-5 bg-[#121218] border-[#22222e]">
           <span className="text-xs text-slate-400">Total Milestone Target</span>
           <div className="text-2xl font-bold text-slate-100 mt-2 tabular-nums">
             {formatCurrency(totalTarget, currencySymbol)}
@@ -113,9 +113,9 @@ export default function GoalsPage() {
           <p className="text-[11px] text-slate-500 mt-1">Overall target sum</p>
         </Card>
 
-        <Card className="p-5 bg-slate-900/80 border-slate-800">
+        <Card className="p-5 bg-[#121218] border-[#22222e]">
           <span className="text-xs text-slate-400">Milestone Completion</span>
-          <div className="text-2xl font-bold text-indigo-300 mt-2 tabular-nums">
+          <div className="text-2xl font-bold text-violet-300 mt-2 tabular-nums">
             {completedCount} / {goals.length} Goals
           </div>
           <p className="text-[11px] text-slate-500 mt-1">{overallProgress}% of target funded</p>
@@ -125,7 +125,7 @@ export default function GoalsPage() {
       {/* Goals Cards Grid */}
       {isLoading ? (
         <div className="flex h-64 items-center justify-center">
-          <div className="h-6 w-6 animate-spin rounded-full border-2 border-emerald-500 border-t-transparent" />
+          <div className="h-6 w-6 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
         </div>
       ) : goals.length > 0 ? (
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
@@ -138,22 +138,22 @@ export default function GoalsPage() {
             return (
               <Card
                 key={goal.id}
-                className="p-6 bg-slate-900/80 border-slate-800 hover:border-slate-700 transition-all flex flex-col justify-between"
+                className="p-6 bg-[#121218] border-[#22222e] hover:border-purple-500/40 transition-all flex flex-col justify-between"
               >
                 <div>
                   {/* Goal Header */}
-                  <div className="flex items-center justify-between pb-3 border-b border-slate-800/80">
+                  <div className="flex items-center justify-between pb-3 border-b border-[#22222e]">
                     <div className="flex items-center gap-2.5">
                       <div
-                        className="flex h-8 w-8 items-center justify-center rounded-xl font-bold text-slate-950 shadow-sm text-xs"
-                        style={{ backgroundColor: goal.color || '#10b981' }}
+                        className="flex h-8 w-8 items-center justify-center rounded-xl font-bold text-white shadow-sm text-xs"
+                        style={{ backgroundColor: goal.color || '#8b5cf6' }}
                       >
                         <Target className="h-4 w-4" />
                       </div>
                       <h4 className="text-sm font-semibold text-slate-100">{goal.name}</h4>
                     </div>
 
-                    <Badge variant={isCompleted ? 'success' : 'neutral'}>
+                    <Badge variant={isCompleted ? 'purple' : 'neutral'}>
                       {isCompleted ? 'Completed 🎉' : `${pct}%`}
                     </Badge>
                   </div>
@@ -162,7 +162,7 @@ export default function GoalsPage() {
                   <div className="my-5 space-y-2">
                     <div className="flex justify-between items-baseline">
                       <span className="text-xs text-slate-400">Saved:</span>
-                      <span className="text-xl font-bold text-emerald-400 tabular-nums">
+                      <span className="text-xl font-bold text-purple-300 tabular-nums">
                         {formatCurrency(current, currencySymbol)}
                       </span>
                     </div>
@@ -174,11 +174,11 @@ export default function GoalsPage() {
                       </span>
                     </div>
 
-                    <div className="w-full bg-slate-800 h-2.5 rounded-full overflow-hidden mt-3">
+                    <div className="w-full bg-[#1c1c28] h-2.5 rounded-full overflow-hidden mt-3">
                       <div
                         className="h-full rounded-full transition-all duration-500"
                         style={{
-                          backgroundColor: goal.color || '#10b981',
+                          backgroundColor: goal.color || '#8b5cf6',
                           width: `${pct}%`,
                         }}
                       />
@@ -194,14 +194,14 @@ export default function GoalsPage() {
                 </div>
 
                 {/* Card Actions */}
-                <div className="flex items-center justify-between pt-4 border-t border-slate-800/80">
+                <div className="flex items-center justify-between pt-4 border-t border-[#22222e]">
                   <div className="flex items-center gap-1">
                     <button
                       onClick={() => {
                         setEditingGoal(goal);
                         setIsAddModalOpen(true);
                       }}
-                      className="p-1.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded-lg transition-colors"
+                      className="p-1.5 text-slate-400 hover:text-slate-200 hover:bg-[#181824] rounded-lg transition-colors"
                       title="Edit Goal"
                     >
                       <Edit2 className="h-3.5 w-3.5" />
@@ -216,7 +216,7 @@ export default function GoalsPage() {
                   </div>
 
                   <Button
-                    variant="emerald"
+                    variant="purple"
                     size="sm"
                     onClick={() => setContributingGoal(goal)}
                     className="text-xs h-8"
@@ -230,7 +230,7 @@ export default function GoalsPage() {
           })}
         </div>
       ) : (
-        <Card className="p-10 bg-slate-900/60 border-slate-800">
+        <Card className="p-10 bg-[#121218] border-[#22222e]">
           <EmptyState
             title="No Savings Goals Yet"
             description="Create visual milestones for emergency funds, travel, or major purchases to automatically allocate money in Safe to Spend."

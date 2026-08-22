@@ -148,7 +148,7 @@ export default function TransactionsPage() {
           </Button>
 
           <Button
-            variant="emerald"
+            variant="purple"
             size="sm"
             onClick={() => {
               setEditingTransaction(null);
@@ -162,7 +162,7 @@ export default function TransactionsPage() {
       </div>
 
       {/* Filter and Summary Bar */}
-      <Card className="p-4 sm:p-5 bg-slate-900/80 border-slate-800 space-y-4">
+      <Card className="p-4 sm:p-5 bg-[#121218] border-[#22222e] space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
           {/* Search Box */}
           <div className="sm:col-span-6">
@@ -197,22 +197,22 @@ export default function TransactionsPage() {
         </div>
 
         {/* Ledger Summary Stats */}
-        <div className="grid grid-cols-3 gap-3 pt-3 border-t border-slate-800/80 text-center sm:text-left">
-          <div className="p-2 sm:p-3 rounded-xl bg-slate-950/50 border border-slate-800">
+        <div className="grid grid-cols-3 gap-3 pt-3 border-t border-[#22222e] text-center sm:text-left">
+          <div className="p-2 sm:p-3 rounded-xl bg-[#0b0b10] border border-[#22222e]">
             <span className="text-[11px] font-medium text-slate-400">Total Filtered Inflow</span>
-            <div className="text-sm sm:text-base font-bold text-emerald-400 mt-0.5 tabular-nums">
+            <div className="text-sm sm:text-base font-bold text-purple-300 mt-0.5 tabular-nums">
               +{formatCurrency(totalIncome, currencySymbol)}
             </div>
           </div>
 
-          <div className="p-2 sm:p-3 rounded-xl bg-slate-950/50 border border-slate-800">
+          <div className="p-2 sm:p-3 rounded-xl bg-[#0b0b10] border border-[#22222e]">
             <span className="text-[11px] font-medium text-slate-400">Total Filtered Outflow</span>
             <div className="text-sm sm:text-base font-bold text-rose-400 mt-0.5 tabular-nums">
               -{formatCurrency(totalExpense, currencySymbol)}
             </div>
           </div>
 
-          <div className="p-2 sm:p-3 rounded-xl bg-slate-950/50 border border-slate-800">
+          <div className="p-2 sm:p-3 rounded-xl bg-[#0b0b10] border border-[#22222e]">
             <span className="text-[11px] font-medium text-slate-400">Net Month Cashflow</span>
             <div
               className={`text-sm sm:text-base font-bold mt-0.5 tabular-nums ${
@@ -226,16 +226,16 @@ export default function TransactionsPage() {
       </Card>
 
       {/* Transactions Table */}
-      <Card className="p-0 bg-slate-900/80 border-slate-800 overflow-hidden">
+      <Card className="p-0 bg-[#121218] border-[#22222e] overflow-hidden">
         {isLoading ? (
           <div className="flex h-64 items-center justify-center">
-            <div className="h-6 w-6 animate-spin rounded-full border-2 border-emerald-500 border-t-transparent" />
+            <div className="h-6 w-6 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
           </div>
         ) : transactions.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-800 bg-slate-950/50 text-slate-400">
+                <tr className="border-b border-[#22222e] bg-[#0d0d13] text-slate-400">
                   <th className="px-6 py-3.5 font-semibold">Date</th>
                   <th className="px-6 py-3.5 font-semibold">Description</th>
                   <th className="px-6 py-3.5 font-semibold">Category</th>
@@ -243,9 +243,9 @@ export default function TransactionsPage() {
                   <th className="px-6 py-3.5 font-semibold text-right">Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-[#22222e]/60">
                 {transactions.map((tx) => (
-                  <tr key={tx.id} className="hover:bg-slate-800/40 transition-colors group">
+                  <tr key={tx.id} className="hover:bg-[#181824]/50 transition-colors group">
                     <td className="px-6 py-4 font-medium text-slate-400 whitespace-nowrap">
                       {formatDate(tx.date)}
                     </td>
@@ -258,7 +258,7 @@ export default function TransactionsPage() {
                         <span
                           className="w-2 h-2 rounded-full inline-block"
                           style={{
-                            backgroundColor: tx.category_details?.color || '#64748b',
+                            backgroundColor: tx.category_details?.color || '#8b5cf6',
                           }}
                         />
                         <span className="text-slate-300 font-medium">
@@ -268,7 +268,7 @@ export default function TransactionsPage() {
                     </td>
                     <td
                       className={`px-6 py-4 text-right font-bold text-sm tabular-nums whitespace-nowrap ${
-                        tx.type === 'income' ? 'text-emerald-400' : 'text-slate-100'
+                        tx.type === 'income' ? 'text-purple-300' : 'text-slate-100'
                       }`}
                     >
                       {tx.type === 'income' ? '+' : '-'}
@@ -281,7 +281,7 @@ export default function TransactionsPage() {
                             setEditingTransaction(tx);
                             setIsAddModalOpen(true);
                           }}
-                          className="p-1.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded-lg transition-colors"
+                          className="p-1.5 text-slate-400 hover:text-slate-200 hover:bg-[#181824] rounded-lg transition-colors"
                           title="Edit Transaction"
                         >
                           <Edit2 className="h-3.5 w-3.5" />

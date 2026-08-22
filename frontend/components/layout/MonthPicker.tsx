@@ -24,24 +24,24 @@ export function MonthPicker() {
   };
 
   return (
-    <div className="flex items-center gap-1.5 rounded-xl border border-slate-800 bg-slate-900/90 p-1 shadow-sm">
+    <div className="flex items-center gap-1.5 rounded-xl border border-[#22222e] bg-[#121218] p-1 shadow-sm">
       <button
         onClick={handlePrev}
-        className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition-colors"
+        className="rounded-lg p-1.5 text-slate-400 hover:bg-[#1c1c28] hover:text-slate-200 transition-colors"
         title="Previous Month"
       >
         <ChevronLeft className="h-4 w-4" />
       </button>
 
       <div className="flex items-center gap-2 px-2">
-        <Calendar className="h-3.5 w-3.5 text-emerald-400" />
+        <Calendar className="h-3.5 w-3.5 text-purple-400" />
         <select
           value={selectedMonth}
           onChange={(e) => setSelectedMonth(e.target.value)}
           className="bg-transparent text-xs font-semibold text-slate-200 focus:outline-none cursor-pointer"
         >
           {options.map((opt) => (
-            <option key={opt.value} value={opt.value} className="bg-slate-900 text-slate-200">
+            <option key={opt.value} value={opt.value} className="bg-[#121218] text-slate-200">
               {opt.label}
             </option>
           ))}
@@ -50,7 +50,7 @@ export function MonthPicker() {
 
       <button
         onClick={handleNext}
-        className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-200 transition-colors"
+        className="rounded-lg p-1.5 text-slate-400 hover:bg-[#1c1c28] hover:text-slate-200 transition-colors"
         title="Next Month"
       >
         <ChevronRight className="h-4 w-4" />

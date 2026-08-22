@@ -44,12 +44,12 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12 bg-slate-950">
+    <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12 bg-[#08080c]">
       <div className="w-full max-w-md space-y-6">
         {/* Brand */}
         <div className="text-center">
           <Link href="/" className="inline-flex items-center gap-2.5 mb-4">
-            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 text-slate-950 font-black text-xl shadow-lg shadow-emerald-500/20">
+            <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 via-violet-600 to-indigo-600 text-white font-black text-xl shadow-lg shadow-purple-600/30">
               V
             </div>
             <span className="text-xl font-bold tracking-tight text-white">VESTO</span>
@@ -61,7 +61,7 @@ export default function LoginPage() {
         </div>
 
         {/* Login Card */}
-        <Card className="bg-slate-900/90 border-slate-800 p-6 sm:p-8 shadow-xl">
+        <Card className="bg-[#121218] border-[#22222e] p-6 sm:p-8 shadow-xl">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>
               <Input
@@ -97,16 +97,16 @@ export default function LoginPage() {
               </div>
             </div>
 
-            <Button type="submit" variant="emerald" className="w-full mt-2" isLoading={isLoading}>
+            <Button type="submit" variant="purple" className="w-full mt-2" isLoading={isLoading}>
               <span>Sign In</span>
               <ArrowRight className="h-4 w-4" />
             </Button>
           </form>
 
-          <div className="mt-6 pt-6 border-t border-slate-800/80 text-center">
+          <div className="mt-6 pt-6 border-t border-[#22222e] text-center">
             <p className="text-xs text-slate-400">
               Don&apos;t have an account yet?{' '}
-              <Link href="/register" className="text-emerald-400 hover:underline font-semibold">
+              <Link href="/register" className="text-purple-400 hover:underline font-semibold">
                 Sign up free
               </Link>
             </p>

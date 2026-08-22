@@ -32,16 +32,16 @@ export function AppSidebar() {
   const { user, logout } = useAuth();
 
   return (
-    <aside className="hidden lg:flex w-64 flex-col border-r border-slate-800/80 bg-slate-950/90 min-h-screen px-4 py-6 justify-between shrink-0">
+    <aside className="hidden lg:flex w-64 flex-col border-r border-[#22222e] bg-[#0b0b10] min-h-screen px-4 py-6 justify-between shrink-0">
       <div>
         {/* Brand Logo */}
         <Link href="/dashboard" className="flex items-center gap-2.5 px-3 mb-8">
-          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 text-slate-950 font-black shadow-md shadow-emerald-500/20 text-lg">
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 via-violet-600 to-indigo-600 text-white font-black shadow-md shadow-purple-600/30 text-lg">
             V
           </div>
           <div className="flex flex-col">
             <span className="text-base font-bold tracking-tight text-white">VESTO</span>
-            <span className="text-[10px] uppercase font-medium text-emerald-400 tracking-wider">
+            <span className="text-[10px] uppercase font-medium text-purple-400 tracking-wider">
               Safe to Spend
             </span>
           </div>
@@ -59,14 +59,14 @@ export function AppSidebar() {
                 className={cn(
                   'flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-all group',
                   isActive
-                    ? 'bg-slate-800/90 text-emerald-400 border border-slate-700/60 shadow-sm'
-                    : 'text-slate-400 hover:text-slate-100 hover:bg-slate-900/60'
+                    ? 'bg-purple-500/15 text-purple-300 border border-purple-500/30 shadow-sm'
+                    : 'text-slate-400 hover:text-slate-100 hover:bg-[#181824]'
                 )}
               >
                 <Icon
                   className={cn(
                     'h-4 w-4 transition-colors',
-                    isActive ? 'text-emerald-400' : 'text-slate-400 group-hover:text-slate-200'
+                    isActive ? 'text-purple-400' : 'text-slate-400 group-hover:text-slate-200'
                   )}
                 />
                 <span>{item.label}</span>
@@ -77,9 +77,9 @@ export function AppSidebar() {
       </div>
 
       {/* User profile & Logout */}
-      <div className="pt-4 border-t border-slate-800/80 space-y-3">
+      <div className="pt-4 border-t border-[#22222e] space-y-3">
         <div className="flex items-center gap-3 px-2">
-          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-slate-800 text-emerald-400 font-semibold text-xs border border-slate-700">
+          <div className="flex h-9 w-9 items-center justify-center rounded-full bg-purple-500/15 text-purple-300 font-semibold text-xs border border-purple-500/30">
             {user?.first_name ? user.first_name[0].toUpperCase() : user?.username?.[0]?.toUpperCase() || 'U'}
           </div>
           <div className="flex flex-col min-w-0 flex-1">

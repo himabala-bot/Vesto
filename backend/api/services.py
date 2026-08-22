@@ -36,8 +36,8 @@ def calculate_dashboard_metrics(user, month_str=None):
 
     # User profile & preferences
     profile, _ = UserProfile.objects.get_or_create(user=user)
-    currency_symbol = profile.currency_symbol or '$'
-    currency = profile.currency or 'USD'
+    currency_symbol = profile.currency_symbol or '₹'
+    currency = profile.currency or 'INR'
 
     # 1. Total Cumulative All-Time Balance (including all previous months)
     all_time_income = Transaction.objects.filter(user=user, type='income').aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
@@ -273,7 +273,7 @@ def calculate_detailed_insights(user, month_str=None):
     today = timezone.now().date()
 
     profile, _ = UserProfile.objects.get_or_create(user=user)
-    currency_symbol = profile.currency_symbol or '$'
+    currency_symbol = profile.currency_symbol or '₹'
 
     # Current month data
     current_txs = Transaction.objects.filter(user=user, date__gte=start_date, date__lte=end_date)

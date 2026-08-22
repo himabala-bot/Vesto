@@ -127,11 +127,11 @@ export function SetBudgetModal({
           />
         </div>
 
-        <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-800/80">
+        <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#22222e]">
           <Button type="button" variant="outline" size="sm" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" variant="emerald" size="sm" isLoading={isLoading}>
+          <Button type="submit" variant="purple" size="sm" isLoading={isLoading}>
             {editBudget ? 'Update Budget' : 'Save Budget'}
           </Button>
         </div>

@@ -8,7 +8,7 @@ import { FeatureHighlights, LandingFooter } from '@/components/landing/FeatureHi
 
 export default function LandingPage() {
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-100 selection:bg-emerald-500/30 selection:text-emerald-200">
+    <div className="min-h-screen bg-[#08080c] text-slate-100 selection:bg-purple-500/30 selection:text-purple-200">
       <LandingNav />
       <main>
         <Hero />

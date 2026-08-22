@@ -5,7 +5,7 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function formatCurrency(amount: number | string | null | undefined, symbol: string = '$'): string {
+export function formatCurrency(amount: number | string | null | undefined, symbol: string = '₹'): string {
   if (amount === null || amount === undefined || isNaN(Number(amount))) {
     return `${symbol}0.00`;
   }
@@ -13,7 +13,7 @@ export function formatCurrency(amount: number | string | null | undefined, symbo
   const isNegative = num < 0;
   const absNum = Math.abs(num);
   
-  const formatted = absNum.toLocaleString('en-US', {
+  const formatted = absNum.toLocaleString('en-IN', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
   });
@@ -21,7 +21,7 @@ export function formatCurrency(amount: number | string | null | undefined, symbo
   return isNegative ? `-${symbol}${formatted}` : `${symbol}${formatted}`;
 }
 
-export function formatCompactCurrency(amount: number | string | null | undefined, symbol: string = '$'): string {
+export function formatCompactCurrency(amount: number | string | null | undefined, symbol: string = '₹'): string {
   if (amount === null || amount === undefined || isNaN(Number(amount))) {
     return `${symbol}0`;
   }
@@ -30,8 +30,10 @@ export function formatCompactCurrency(amount: number | string | null | undefined
   const absNum = Math.abs(num);
 
   let formatted = '';
-  if (absNum >= 1_000_000) {
-    formatted = `${(absNum / 1_000_000).toFixed(1)}M`;
+  if (absNum >= 1_00_00_000) {
+    formatted = `${(absNum / 1_00_00_000).toFixed(2)}Cr`;
+  } else if (absNum >= 1_00_000) {
+    formatted = `${(absNum / 1_00_000).toFixed(2)}L`;
   } else if (absNum >= 1_000) {
     formatted = `${(absNum / 1_000).toFixed(1)}k`;
   } else {

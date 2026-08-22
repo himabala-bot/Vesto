@@ -11,14 +11,7 @@ import { Lock, User as UserIcon, Mail, ArrowRight, DollarSign } from 'lucide-rea
 import { toast } from 'sonner';
 
 const CURRENCY_OPTIONS = [
-  { value: 'USD', label: 'USD ($) - US Dollar', symbol: '$' },
-  { value: 'EUR', label: 'EUR (€) - Euro', symbol: '€' },
-  { value: 'GBP', label: 'GBP (£) - British Pound', symbol: '£' },
   { value: 'INR', label: 'INR (₹) - Indian Rupee', symbol: '₹' },
-  { value: 'CAD', label: 'CAD ($) - Canadian Dollar', symbol: '$' },
-  { value: 'AUD', label: 'AUD ($) - Australian Dollar', symbol: '$' },
-  { value: 'JPY', label: 'JPY (¥) - Japanese Yen', symbol: '¥' },
-  { value: 'SGD', label: 'SGD ($) - Singapore Dollar', symbol: '$' },
 ];
 
 export default function RegisterPage() {
@@ -27,7 +20,8 @@ export default function RegisterPage() {
   const [email, setEmail] = useState('');
   const [firstName, setFirstName] = useState('');
   const [password, setPassword] = useState('');
-  const [currency, setCurrency] = useState('USD');
+  const [currency, setCurrency] = useState('INR');
+  const [currencySymbol, setCurrencySymbol] = useState<string>('₹');
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -42,7 +36,7 @@ export default function RegisterPage() {
     }
 
     const selectedCurrencyObj = CURRENCY_OPTIONS.find((c) => c.value === currency);
-    const currencySymbol = selectedCurrencyObj ? selectedCurrencyObj.symbol : '$';
+      const symbol = selectedCurrencyObj ? selectedCurrencyObj.symbol : '₹';
 
     setIsLoading(true);
     try {

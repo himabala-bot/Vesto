@@ -18,8 +18,9 @@ import {
   Trash2,
   Calendar,
   CheckCircle2,
-  Clock,
-  DollarSign,
+  IndianRupee,
+  CreditCard,
+  ChevronRight,
   Shield,
 } from 'lucide-react';
 import { toast } from 'sonner';
@@ -97,7 +98,7 @@ export default function RecurringPage() {
         </div>
 
         <Button
-          variant="emerald"
+          variant="purple"
           size="sm"
           onClick={() => {
             setEditingRecurring(null);
@@ -111,7 +112,7 @@ export default function RecurringPage() {
 
       {/* Summary KPI Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="p-5 bg-slate-900/80 border-slate-800">
+        <Card className="p-5 bg-[#121218] border-[#22222e]">
           <span className="text-xs text-slate-400">Monthly Committed Total</span>
           <div className="text-2xl font-bold text-rose-400 mt-2 tabular-nums">
             {formatCurrency(monthlyTotal, currencySymbol)}
@@ -119,7 +120,7 @@ export default function RecurringPage() {
           <p className="text-[11px] text-slate-500 mt-1">Reserved automatically every month</p>
         </Card>
 
-        <Card className="p-5 bg-slate-900/80 border-slate-800">
+        <Card className="p-5 bg-[#121218] border-[#22222e]">
           <span className="text-xs text-slate-400">Annualized Outflow</span>
           <div className="text-2xl font-bold text-slate-100 mt-2 tabular-nums">
             {formatCurrency(annualTotal, currencySymbol)}
@@ -127,9 +128,9 @@ export default function RecurringPage() {
           <p className="text-[11px] text-slate-500 mt-1">12-month fixed obligation sum</p>
         </Card>
 
-        <Card className="p-5 bg-slate-900/80 border-slate-800">
+        <Card className="p-5 bg-[#121218] border-[#22222e]">
           <span className="text-xs text-slate-400">Active Subscriptions</span>
-          <div className="text-2xl font-bold text-indigo-300 mt-2 tabular-nums">
+          <div className="text-2xl font-bold text-violet-300 mt-2 tabular-nums">
             {recurringList.length} Services
           </div>
           <p className="text-[11px] text-slate-500 mt-1">Tracked recurring commitments</p>
@@ -137,16 +138,16 @@ export default function RecurringPage() {
       </div>
 
       {/* Recurring Bills Table / Cards */}
-      <Card className="p-0 bg-slate-900/80 border-slate-800 overflow-hidden">
+      <Card className="p-0 bg-[#121218] border-[#22222e] overflow-hidden">
         {isLoading ? (
           <div className="flex h-64 items-center justify-center">
-            <div className="h-6 w-6 animate-spin rounded-full border-2 border-emerald-500 border-t-transparent" />
+            <div className="h-6 w-6 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
           </div>
         ) : recurringList.length > 0 ? (
           <div className="overflow-x-auto">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-800 bg-slate-950/50 text-slate-400">
+                <tr className="border-b border-[#22222e] bg-[#0d0d13] text-slate-400">
                   <th className="px-6 py-3.5 font-semibold">Service / Bill</th>
                   <th className="px-6 py-3.5 font-semibold">Category</th>
                   <th className="px-6 py-3.5 font-semibold">Frequency</th>
@@ -155,17 +156,17 @@ export default function RecurringPage() {
                   <th className="px-6 py-3.5 font-semibold text-right">Quick Actions</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-[#22222e]/60">
                 {recurringList.map((item) => {
                   const amt = Number(item.amount);
                   const isPaidThisMonth = item.last_logged_date && item.last_logged_date.startsWith(selectedMonth);
 
                   return (
-                    <tr key={item.id} className="hover:bg-slate-800/40 transition-colors group">
+                    <tr key={item.id} className="hover:bg-[#181824]/50 transition-colors group">
                       <td className="px-6 py-4">
                         <div className="font-semibold text-slate-200">{item.name}</div>
                         {isPaidThisMonth && (
-                          <span className="inline-flex items-center gap-1 text-[10px] text-emerald-400 font-medium mt-0.5">
+                          <span className="inline-flex items-center gap-1 text-[10px] text-purple-300 font-medium mt-0.5">
                             <CheckCircle2 className="h-3 w-3" /> Paid this month
                           </span>
                         )}
@@ -175,7 +176,7 @@ export default function RecurringPage() {
                           <span
                             className="w-2 h-2 rounded-full inline-block"
                             style={{
-                              backgroundColor: item.category_details?.color || '#64748b',
+                              backgroundColor: item.category_details?.color || '#8b5cf6',
                             }}
                           />
                           <span className="text-slate-300 font-medium">
@@ -193,7 +194,7 @@ export default function RecurringPage() {
                       <td className="px-6 py-4 text-right whitespace-nowrap">
                         <div className="flex items-center justify-end gap-2">
                           <Button
-                            variant={isPaidThisMonth ? 'secondary' : 'emerald'}
+                            variant={isPaidThisMonth ? 'secondary' : 'purple'}
                             size="sm"
                             onClick={() => handleLogPayment(item.id, item.name)}
                             className="text-[11px] h-7 px-2.5"
@@ -205,7 +206,7 @@ export default function RecurringPage() {
                               setEditingRecurring(item);
                               setIsModalOpen(true);
                             }}
-                            className="p-1.5 text-slate-400 hover:text-slate-200 hover:bg-slate-800 rounded-lg transition-colors"
+                            className="p-1.5 text-slate-400 hover:text-slate-200 hover:bg-[#181824] rounded-lg transition-colors"
                             title="Edit Bill"
                           >
                             <Edit2 className="h-3.5 w-3.5" />

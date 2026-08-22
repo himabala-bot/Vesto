@@ -14,7 +14,7 @@ const MonthContext = createContext<MonthContextType | undefined>(undefined);
 
 export const MonthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedMonth, setSelectedMonth] = useState<string>(getCurrentMonthString());
-  const [currencySymbol, setCurrencySymbol] = useState<string>('$');
+  const [currencySymbol, setCurrencySymbol] = useState<string>('₹');
 
   return (
     <MonthContext.Provider

@@ -19,16 +19,16 @@ class UserSerializer(serializers.ModelSerializer):
 
 class RegisterSerializer(serializers.ModelSerializer):
     password = serializers.CharField(write_only=True, min_length=6)
-    currency = serializers.CharField(write_only=True, required=False, default='USD')
-    currency_symbol = serializers.CharField(write_only=True, required=False, default='$')
+    currency = serializers.CharField(write_only=True, required=False, default='INR')
+    currency_symbol = serializers.CharField(write_only=True, required=False, default='₹')
 
     class Meta:
         model = User
         fields = ('id', 'username', 'email', 'password', 'first_name', 'last_name', 'currency', 'currency_symbol')
 
     def create(self, validated_data):
-        currency = validated_data.pop('currency', 'USD')
-        currency_symbol = validated_data.pop('currency_symbol', '$')
+        currency = validated_data.pop('currency', 'INR')
+        currency_symbol = validated_data.pop('currency_symbol', '₹')
         password = validated_data.pop('password')
 
         user = User.objects.create_user(

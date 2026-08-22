@@ -6,8 +6,8 @@ from decimal import Decimal
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
-    currency = models.CharField(max_length=10, default='USD')
-    currency_symbol = models.CharField(max_length=5, default='$')
+    currency = models.CharField(max_length=10, default='INR')
+    currency_symbol = models.CharField(max_length=5, default='₹')
     monthly_income_target = models.DecimalField(max_digits=12, decimal_places=2, default=Decimal('0.00'))
     monthly_savings_target = models.DecimalField(max_digits=12, decimal_places=2, default=Decimal('0.00'))
     created_at = models.DateTimeField(auto_now_add=True)

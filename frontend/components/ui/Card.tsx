@@ -9,7 +9,7 @@ export function Card({
   return (
     <div
       className={cn(
-        'rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5 backdrop-blur-sm text-slate-100 shadow-sm transition-all',
+        'rounded-2xl border border-[#22222e] bg-[#121218]/90 p-5 backdrop-blur-sm text-slate-100 shadow-sm transition-all',
         className
       )}
       {...props}
@@ -79,7 +79,7 @@ export function CardFooter({
   ...props
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
-    <div className={cn('flex items-center pt-4 border-t border-slate-800/60', className)} {...props}>
+    <div className={cn('flex items-center pt-4 border-t border-[#22222e]', className)} {...props}>
       {children}
     </div>
   );

@@ -63,7 +63,7 @@ export default function InsightsPage() {
     return (
       <div className="flex h-96 items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-emerald-500 border-t-transparent" />
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
           <p className="text-xs text-slate-400 font-medium">Generating spending intelligence & trends...</p>
         </div>
       </div>
@@ -86,18 +86,18 @@ export default function InsightsPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
-            <Sparkles className="h-6 w-6 text-emerald-400" />
+            <Sparkles className="h-6 w-6 text-purple-400" />
             <span>Financial Insights & Trends</span>
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-            Spending velocity, category distribution and automated observations for {insights?.month_label}
+            Spending velocity, category distribution and automated observations for <span className="text-purple-300 font-medium">{insights?.month_label}</span>
           </p>
         </div>
       </div>
 
       {/* MoM Performance Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Card className="p-5 bg-slate-900/80 border-slate-800">
+        <Card className="p-5 bg-[#121218] border-[#22222e]">
           <span className="text-xs text-slate-400">Current Month Outflow</span>
           <div className="text-2xl font-bold text-slate-100 mt-2 tabular-nums">
             {formatCurrency(curr?.expense, currencySymbol)}
@@ -106,7 +106,7 @@ export default function InsightsPage() {
             {momChange !== 0 ? (
               <span
                 className={`font-semibold flex items-center gap-0.5 ${
-                  isSpendingUp ? 'text-rose-400' : 'text-emerald-400'
+                  isSpendingUp ? 'text-rose-400' : 'text-purple-300'
                 }`}
               >
                 {isSpendingUp ? (
@@ -123,7 +123,7 @@ export default function InsightsPage() {
           </div>
         </Card>
 
-        <Card className="p-5 bg-slate-900/80 border-slate-800">
+        <Card className="p-5 bg-[#121218] border-[#22222e]">
           <span className="text-xs text-slate-400">Previous Month Outflow</span>
           <div className="text-2xl font-bold text-slate-300 mt-2 tabular-nums">
             {formatCurrency(insights?.previous_summary?.expense, currencySymbol)}
@@ -131,11 +131,11 @@ export default function InsightsPage() {
           <p className="text-[11px] text-slate-500 mt-1">Full prior cycle total</p>
         </Card>
 
-        <Card className="p-5 bg-slate-900/80 border-slate-800">
+        <Card className="p-5 bg-[#121218] border-[#22222e]">
           <span className="text-xs text-slate-400">Net Month Savings</span>
           <div
             className={`text-2xl font-bold mt-2 tabular-nums ${
-              (curr?.net_savings || 0) >= 0 ? 'text-emerald-400' : 'text-rose-400'
+              (curr?.net_savings || 0) >= 0 ? 'text-purple-300' : 'text-rose-400'
             }`}
           >
             {formatCurrency(curr?.net_savings, currencySymbol)}
@@ -156,24 +156,24 @@ export default function InsightsPage() {
                 key={idx}
                 className={`p-4 border transition-all ${
                   alert.type === 'success'
-                    ? 'border-emerald-500/30 bg-emerald-950/10'
+                    ? 'border-purple-500/30 bg-purple-950/10'
                     : alert.type === 'warning'
                     ? 'border-amber-500/30 bg-amber-950/10'
                     : alert.type === 'danger'
                     ? 'border-rose-500/30 bg-rose-950/10'
-                    : 'border-slate-800 bg-slate-900/60'
+                    : 'border-[#22222e] bg-[#121218]'
                 }`}
               >
                 <div className="flex items-start gap-3">
                   <div
                     className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg mt-0.5 ${
                       alert.type === 'success'
-                        ? 'text-emerald-400 bg-emerald-500/20'
+                        ? 'text-purple-400 bg-purple-500/20'
                         : alert.type === 'warning'
                         ? 'text-amber-400 bg-amber-500/20'
                         : alert.type === 'danger'
                         ? 'text-rose-400 bg-rose-500/20'
-                        : 'text-slate-400 bg-slate-800'
+                        : 'text-slate-400 bg-[#181824]'
                     }`}
                   >
                     {alert.type === 'success' && <CheckCircle2 className="h-4 w-4" />}
@@ -188,7 +188,7 @@ export default function InsightsPage() {
                     </p>
                     {alert.action_label && (
                       <Button
-                        variant="emerald"
+                        variant="purple"
                         size="sm"
                         onClick={openAddTransaction}
                         className="mt-3 text-[11px] h-7 px-3"
@@ -205,8 +205,8 @@ export default function InsightsPage() {
       )}
 
       {/* Spending Velocity Comparison Chart */}
-      <Card className="p-6 bg-slate-900/80 border-slate-800">
-        <div className="flex items-center justify-between pb-4 border-b border-slate-800/80">
+      <Card className="p-6 bg-[#121218] border-[#22222e]">
+        <div className="flex items-center justify-between pb-4 border-b border-[#22222e]">
           <div>
             <CardTitle>Spending Velocity Pace</CardTitle>
             <CardDescription>
@@ -220,13 +220,13 @@ export default function InsightsPage() {
           insights.velocity_data.some((d) => d.current_month !== null || d.previous_month !== null) ? (
             <ResponsiveContainer width="100%" height="100%">
               <LineChart data={insights.velocity_data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                <CartesianGrid strokeDasharray="3 3" stroke="#1e1e2c" />
                 <XAxis dataKey="day" stroke="#64748b" fontSize={11} tickLine={false} tickFormatter={(d) => `Day ${d}`} />
                 <YAxis stroke="#64748b" fontSize={11} tickLine={false} tickFormatter={(val) => `${currencySymbol}${val}`} />
                 <Tooltip
                   contentStyle={{
-                    backgroundColor: '#0f172a',
-                    borderColor: '#1e293b',
+                    backgroundColor: '#121218',
+                    borderColor: '#22222e',
                     borderRadius: '0.75rem',
                     color: '#f8fafc',
                     fontSize: '12px',
@@ -239,7 +239,7 @@ export default function InsightsPage() {
                   type="monotone"
                   dataKey="current_month"
                   name={`Current Month (${insights?.month_label})`}
-                  stroke="#10b981"
+                  stroke="#8b5cf6"
                   strokeWidth={2.5}
                   dot={false}
                   connectNulls={false}
@@ -270,9 +270,9 @@ export default function InsightsPage() {
       {/* Category Breakdown & MoM Shift Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Donut Chart */}
-        <Card className="lg:col-span-5 p-6 bg-slate-900/80 border-slate-800 flex flex-col justify-between">
+        <Card className="lg:col-span-5 p-6 bg-[#121218] border-[#22222e] flex flex-col justify-between">
           <div>
-            <div className="pb-4 border-b border-slate-800/80">
+            <div className="pb-4 border-b border-[#22222e]">
               <CardTitle>Category Distribution</CardTitle>
               <CardDescription>Share of wallet by category</CardDescription>
             </div>
@@ -292,13 +292,13 @@ export default function InsightsPage() {
                       paddingAngle={3}
                     >
                       {pieData.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={entry.color || '#64748b'} />
+                        <Cell key={`cell-${index}`} fill={entry.color || '#8b5cf6'} />
                       ))}
                     </Pie>
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: '#0f172a',
-                        borderColor: '#1e293b',
+                        backgroundColor: '#121218',
+                        borderColor: '#22222e',
                         borderRadius: '0.75rem',
                         color: '#f8fafc',
                         fontSize: '12px',
@@ -320,8 +320,8 @@ export default function InsightsPage() {
         </Card>
 
         {/* Detailed Category Table */}
-        <Card className="lg:col-span-7 p-0 bg-slate-900/80 border-slate-800 overflow-hidden">
-          <div className="p-5 border-b border-slate-800/80">
+        <Card className="lg:col-span-7 p-0 bg-[#121218] border-[#22222e] overflow-hidden">
+          <div className="p-5 border-b border-[#22222e]">
             <CardTitle>Month-over-Month Category Changes</CardTitle>
             <CardDescription>Shift in outflow compared to previous month</CardDescription>
           </div>
@@ -330,16 +330,16 @@ export default function InsightsPage() {
             {insights?.category_insights && insights.category_insights.length > 0 ? (
               <table className="w-full text-left text-xs">
                 <thead>
-                  <tr className="border-b border-slate-800 bg-slate-950/50 text-slate-400">
+                  <tr className="border-b border-[#22222e] bg-[#0d0d13] text-slate-400">
                     <th className="px-5 py-3 font-semibold">Category</th>
                     <th className="px-5 py-3 font-semibold text-right">This Month</th>
                     <th className="px-5 py-3 font-semibold text-right">Share</th>
                     <th className="px-5 py-3 font-semibold text-right">MoM Change</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-800/60">
+                <tbody className="divide-y divide-[#22222e]/60">
                   {insights.category_insights.map((cat) => (
-                    <tr key={cat.category_id} className="hover:bg-slate-800/40 transition-colors">
+                    <tr key={cat.category_id} className="hover:bg-[#181824]/50 transition-colors">
                       <td className="px-5 py-3 font-medium text-slate-200 flex items-center gap-2">
                         <span
                           className="w-2.5 h-2.5 rounded-full inline-block"
@@ -357,7 +357,7 @@ export default function InsightsPage() {
                         {cat.mom_change_percentage !== null ? (
                           <span
                             className={`font-semibold ${
-                              cat.mom_change_percentage > 0 ? 'text-rose-400' : 'text-emerald-400'
+                              cat.mom_change_percentage > 0 ? 'text-rose-400' : 'text-purple-300'
                             }`}
                           >
                             {cat.mom_change_percentage > 0

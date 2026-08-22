@@ -20,7 +20,7 @@ import {
   TrendingDown,
   ArrowUpRight,
   ArrowDownRight,
-  DollarSign,
+  IndianRupee,
   Calendar,
   Sparkles,
   Plus,
@@ -88,7 +88,7 @@ export default function DashboardPage() {
     return (
       <div className="flex h-96 items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <div className="h-8 w-8 animate-spin rounded-full border-2 border-emerald-500 border-t-transparent" />
+          <div className="h-8 w-8 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
           <p className="text-xs text-slate-400 font-medium">Calculating Safe to Spend metrics...</p>
         </div>
       </div>
@@ -107,12 +107,12 @@ export default function DashboardPage() {
             Hello, {user?.first_name || user?.username}! 👋
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
-            Here is your financial status for <span className="text-slate-200 font-medium">{metrics?.month_label}</span>.
+            Here is your financial status for <span className="text-purple-300 font-medium">{metrics?.month_label}</span>.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <Button variant="emerald" size="sm" onClick={openAddTransaction}>
+          <Button variant="purple" size="sm" onClick={openAddTransaction}>
             <Plus className="h-4 w-4" />
             <span>Add Transaction</span>
           </Button>
@@ -121,9 +121,9 @@ export default function DashboardPage() {
 
       {/* Onboarding checklist for new users */}
       {isNewUser && (
-        <Card className="border-emerald-500/30 bg-emerald-950/10 p-5 sm:p-6">
+        <Card className="border-purple-500/30 bg-purple-950/10 p-5 sm:p-6">
           <div className="flex items-start gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-emerald-500/20 text-emerald-400">
+            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-purple-500/20 text-purple-400">
               <Sparkles className="h-5 w-5" />
             </div>
             <div className="flex-1">
@@ -136,9 +136,9 @@ export default function DashboardPage() {
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
                 <div
                   onClick={openAddTransaction}
-                  className="p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 cursor-pointer transition-colors group"
+                  className="p-3 rounded-xl bg-[#121218] border border-[#22222e] hover:border-purple-500/40 cursor-pointer transition-colors group"
                 >
-                  <span className="text-xs font-semibold text-slate-200 group-hover:text-emerald-400 flex items-center gap-1.5">
+                  <span className="text-xs font-semibold text-slate-200 group-hover:text-purple-400 flex items-center gap-1.5">
                     1. Record Income
                     <ArrowRight className="h-3 w-3" />
                   </span>
@@ -147,9 +147,9 @@ export default function DashboardPage() {
 
                 <Link
                   href="/recurring"
-                  className="p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition-colors group"
+                  className="p-3 rounded-xl bg-[#121218] border border-[#22222e] hover:border-purple-500/40 transition-colors group"
                 >
-                  <span className="text-xs font-semibold text-slate-200 group-hover:text-emerald-400 flex items-center gap-1.5">
+                  <span className="text-xs font-semibold text-slate-200 group-hover:text-purple-400 flex items-center gap-1.5">
                     2. Add Fixed Bills
                     <ArrowRight className="h-3 w-3" />
                   </span>
@@ -158,9 +158,9 @@ export default function DashboardPage() {
 
                 <Link
                   href="/goals"
-                  className="p-3 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 transition-colors group"
+                  className="p-3 rounded-xl bg-[#121218] border border-[#22222e] hover:border-purple-500/40 transition-colors group"
                 >
-                  <span className="text-xs font-semibold text-slate-200 group-hover:text-emerald-400 flex items-center gap-1.5">
+                  <span className="text-xs font-semibold text-slate-200 group-hover:text-purple-400 flex items-center gap-1.5">
                     3. Set Savings Goal
                     <ArrowRight className="h-3 w-3" />
                   </span>
@@ -176,12 +176,12 @@ export default function DashboardPage() {
       <Card
         className={`p-6 sm:p-8 relative overflow-hidden transition-all ${
           safe?.status === 'on_track'
-            ? 'border-emerald-500/40 safe-glow-emerald bg-gradient-to-br from-slate-900 via-slate-900 to-emerald-950/20'
+            ? 'border-purple-500/40 safe-glow-purple bg-gradient-to-br from-[#121218] via-[#141420] to-purple-950/20'
             : safe?.status === 'caution'
-            ? 'border-amber-500/40 safe-glow-amber bg-gradient-to-br from-slate-900 via-slate-900 to-amber-950/20'
+            ? 'border-amber-500/40 safe-glow-amber bg-gradient-to-br from-[#121218] via-[#141420] to-amber-950/20'
             : safe?.status === 'exceeded'
-            ? 'border-rose-500/40 safe-glow-rose bg-gradient-to-br from-slate-900 via-slate-900 to-rose-950/20'
-            : 'border-slate-800 bg-slate-900/80'
+            ? 'border-rose-500/40 safe-glow-rose bg-gradient-to-br from-[#121218] via-[#141420] to-rose-950/20'
+            : 'border-[#22222e] bg-[#121218]'
         }`}
       >
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
@@ -193,7 +193,7 @@ export default function DashboardPage() {
               <Badge
                 variant={
                   safe?.status === 'on_track'
-                    ? 'success'
+                    ? 'purple'
                     : safe?.status === 'caution'
                     ? 'warning'
                     : safe?.status === 'exceeded'
@@ -230,16 +230,16 @@ export default function DashboardPage() {
 
           {/* Quick Metrics & Toggle Breakdown */}
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
-            <div className="rounded-2xl bg-slate-950/60 p-4 border border-slate-800/80 text-center sm:text-left min-w-[140px]">
+            <div className="rounded-2xl bg-[#0b0b10] p-4 border border-[#22222e] text-center sm:text-left min-w-[140px]">
               <span className="text-[11px] font-medium text-slate-400">This Week</span>
               <div className="text-xl font-bold text-slate-100 mt-0.5 tabular-nums">
                 {formatCurrency(safe?.safe_weekly, currencySymbol)}
               </div>
             </div>
 
-            <div className="rounded-2xl bg-slate-950/60 p-4 border border-slate-800/80 text-center sm:text-left min-w-[140px]">
+            <div className="rounded-2xl bg-[#0b0b10] p-4 border border-[#22222e] text-center sm:text-left min-w-[140px]">
               <span className="text-[11px] font-medium text-slate-400">Month Remaining</span>
-              <div className="text-xl font-bold text-emerald-400 mt-0.5 tabular-nums">
+              <div className="text-xl font-bold text-purple-300 mt-0.5 tabular-nums">
                 {formatCurrency(safe?.safe_month, currencySymbol)}
               </div>
             </div>
@@ -258,26 +258,26 @@ export default function DashboardPage() {
 
         {/* Expandable Formula Math breakdown */}
         {showSafeBreakdown && (
-          <div className="mt-6 pt-6 border-t border-slate-800/80 grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs animate-in fade-in-50 duration-200">
-            <div className="p-3 rounded-xl bg-slate-950/50 border border-slate-800">
+          <div className="mt-6 pt-6 border-t border-[#22222e] grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs animate-in fade-in-50 duration-200">
+            <div className="p-3 rounded-xl bg-[#0b0b10]/60 border border-[#22222e]">
               <span className="text-slate-400">1. Effective Income</span>
-              <div className="text-sm font-semibold text-emerald-400 mt-1 tabular-nums">
+              <div className="text-sm font-semibold text-purple-300 mt-1 tabular-nums">
                 +{formatCurrency(safe?.effective_income, currencySymbol)}
               </div>
             </div>
-            <div className="p-3 rounded-xl bg-slate-950/50 border border-slate-800">
+            <div className="p-3 rounded-xl bg-[#0b0b10]/60 border border-[#22222e]">
               <span className="text-slate-400">2. Committed Bills</span>
               <div className="text-sm font-semibold text-rose-400 mt-1 tabular-nums">
                 -{formatCurrency(safe?.committed_recurring, currencySymbol)}
               </div>
             </div>
-            <div className="p-3 rounded-xl bg-slate-950/50 border border-slate-800">
+            <div className="p-3 rounded-xl bg-[#0b0b10]/60 border border-[#22222e]">
               <span className="text-slate-400">3. Savings Goal Lock</span>
-              <div className="text-sm font-semibold text-indigo-400 mt-1 tabular-nums">
+              <div className="text-sm font-semibold text-violet-300 mt-1 tabular-nums">
                 -{formatCurrency(safe?.savings_target, currencySymbol)}
               </div>
             </div>
-            <div className="p-3 rounded-xl bg-slate-950/50 border border-slate-800">
+            <div className="p-3 rounded-xl bg-[#0b0b10]/60 border border-[#22222e]">
               <span className="text-slate-400">4. Spent So Far</span>
               <div className="text-sm font-semibold text-amber-400 mt-1 tabular-nums">
                 -{formatCurrency(safe?.total_spent, currencySymbol)}
@@ -290,10 +290,10 @@ export default function DashboardPage() {
       {/* 4 Key Stat Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* All-Time Balance */}
-        <Card className="p-5 bg-slate-900/70 border-slate-800">
+        <Card className="p-5 bg-[#121218] border-[#22222e]">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Total Lifetime Balance</span>
-            <DollarSign className="h-4 w-4 text-emerald-400" />
+            <IndianRupee className="h-4 w-4 text-purple-400" />
           </div>
           <div className="text-2xl font-bold text-slate-100 mt-2 tabular-nums">
             {formatCurrency(metrics?.all_time_balance, currencySymbol)}
@@ -302,19 +302,19 @@ export default function DashboardPage() {
         </Card>
 
         {/* Month Income */}
-        <Card className="p-5 bg-slate-900/70 border-slate-800">
+        <Card className="p-5 bg-[#121218] border-[#22222e]">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Month Income</span>
-            <ArrowUpRight className="h-4 w-4 text-emerald-400" />
+            <ArrowUpRight className="h-4 w-4 text-purple-400" />
           </div>
-          <div className="text-2xl font-bold text-emerald-400 mt-2 tabular-nums">
+          <div className="text-2xl font-bold text-purple-300 mt-2 tabular-nums">
             {formatCurrency(metrics?.month_summary?.income, currencySymbol)}
           </div>
           <p className="text-[11px] text-slate-500 mt-1">Received in {metrics?.month_label}</p>
         </Card>
 
         {/* Month Expense */}
-        <Card className="p-5 bg-slate-900/70 border-slate-800">
+        <Card className="p-5 bg-[#121218] border-[#22222e]">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Month Outflow</span>
             <ArrowDownRight className="h-4 w-4 text-rose-400" />
@@ -326,12 +326,12 @@ export default function DashboardPage() {
         </Card>
 
         {/* Net Savings Rate */}
-        <Card className="p-5 bg-slate-900/70 border-slate-800">
+        <Card className="p-5 bg-[#121218] border-[#22222e]">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Savings Rate</span>
-            <TrendingUp className="h-4 w-4 text-indigo-400" />
+            <TrendingUp className="h-4 w-4 text-violet-400" />
           </div>
-          <div className="text-2xl font-bold text-indigo-300 mt-2 tabular-nums">
+          <div className="text-2xl font-bold text-violet-300 mt-2 tabular-nums">
             {metrics?.month_summary?.savings_rate || 0}%
           </div>
           <p className="text-[11px] text-slate-500 mt-1">
@@ -343,8 +343,8 @@ export default function DashboardPage() {
       {/* Charts & Spending Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Left: Cashflow 6-Month Trend Chart */}
-        <Card className="lg:col-span-8 p-6 bg-slate-900/70 border-slate-800">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-800/80">
+        <Card className="lg:col-span-8 p-6 bg-[#121218] border-[#22222e]">
+          <div className="flex items-center justify-between pb-4 border-b border-[#22222e]">
             <div>
               <CardTitle>Cashflow History</CardTitle>
               <CardDescription>Income vs Expenses over the past 6 months</CardDescription>
@@ -361,13 +361,13 @@ export default function DashboardPage() {
             {metrics?.cashflow_trend && metrics.cashflow_trend.some((d) => d.income > 0 || d.expense > 0) ? (
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={metrics.cashflow_trend} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="#1e293b" />
+                  <CartesianGrid strokeDasharray="3 3" stroke="#1e1e2c" />
                   <XAxis dataKey="month" stroke="#64748b" fontSize={11} tickLine={false} />
                   <YAxis stroke="#64748b" fontSize={11} tickLine={false} tickFormatter={(val) => `${currencySymbol}${val}`} />
                   <Tooltip
                     contentStyle={{
-                      backgroundColor: '#0f172a',
-                      borderColor: '#1e293b',
+                      backgroundColor: '#121218',
+                      borderColor: '#22222e',
                       borderRadius: '0.75rem',
                       color: '#f8fafc',
                       fontSize: '12px',
@@ -375,7 +375,7 @@ export default function DashboardPage() {
                     formatter={(val: any) => [`${currencySymbol}${Number(val).toLocaleString()}`, '']}
                   />
                   <Legend wrapperStyle={{ fontSize: '11px', paddingTop: '10px' }} />
-                  <Bar dataKey="income" name="Income" fill="#10b981" radius={[4, 4, 0, 0]} />
+                  <Bar dataKey="income" name="Income" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
                   <Bar dataKey="expense" name="Expenses" fill="#f43f5e" radius={[4, 4, 0, 0]} />
                 </BarChart>
               </ResponsiveContainer>
@@ -391,9 +391,9 @@ export default function DashboardPage() {
         </Card>
 
         {/* Right: Spending by Category */}
-        <Card className="lg:col-span-4 p-6 bg-slate-900/70 border-slate-800 flex flex-col justify-between">
+        <Card className="lg:col-span-4 p-6 bg-[#121218] border-[#22222e] flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between pb-4 border-b border-slate-800/80">
+            <div className="flex items-center justify-between pb-4 border-b border-[#22222e]">
               <div>
                 <CardTitle>Spending by Category</CardTitle>
                 <CardDescription>Budget vs actual for {metrics?.month_label}</CardDescription>
@@ -428,14 +428,14 @@ export default function DashboardPage() {
                       </span>
                     </div>
                     {cat.budget > 0 && (
-                      <div className="w-full bg-slate-800 h-1.5 rounded-full overflow-hidden">
+                      <div className="w-full bg-[#1c1c28] h-1.5 rounded-full overflow-hidden">
                         <div
                           className={`h-full rounded-full transition-all ${
                             cat.percentage > 100
                               ? 'bg-rose-500'
                               : cat.percentage > 80
                               ? 'bg-amber-500'
-                              : 'bg-emerald-500'
+                              : 'bg-purple-500'
                           }`}
                           style={{ width: `${Math.min(cat.percentage, 100)}%` }}
                         />
@@ -459,8 +459,8 @@ export default function DashboardPage() {
       {/* Bottom Grid: Upcoming Recurring & Savings Goals */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Upcoming Bills */}
-        <Card className="lg:col-span-6 p-6 bg-slate-900/70 border-slate-800">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-800/80">
+        <Card className="lg:col-span-6 p-6 bg-[#121218] border-[#22222e]">
+          <div className="flex items-center justify-between pb-4 border-b border-[#22222e]">
             <div>
               <CardTitle>Upcoming Bills & Subscriptions</CardTitle>
               <CardDescription>Committed recurring obligations for this month</CardDescription>
@@ -478,10 +478,10 @@ export default function DashboardPage() {
               metrics.upcoming_recurring.slice(0, 4).map((bill) => (
                 <div
                   key={bill.id}
-                  className="flex items-center justify-between p-3 rounded-xl bg-slate-950/60 border border-slate-800/80 hover:border-slate-700 transition-colors"
+                  className="flex items-center justify-between p-3 rounded-xl bg-[#0b0b10] border border-[#22222e] hover:border-purple-500/30 transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-slate-800 text-slate-300 font-bold text-xs">
+                    <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-purple-500/15 text-purple-300 font-bold text-xs border border-purple-500/20">
                       {bill.due_day}
                     </div>
                     <div>
@@ -497,7 +497,7 @@ export default function DashboardPage() {
                       {formatCurrency(bill.amount, currencySymbol)}
                     </span>
                     {bill.is_paid ? (
-                      <Badge variant="success">Paid</Badge>
+                      <Badge variant="purple">Paid</Badge>
                     ) : (
                       <Button
                         variant="secondary"
@@ -523,8 +523,8 @@ export default function DashboardPage() {
         </Card>
 
         {/* Savings Goals Preview */}
-        <Card className="lg:col-span-6 p-6 bg-slate-900/70 border-slate-800">
-          <div className="flex items-center justify-between pb-4 border-b border-slate-800/80">
+        <Card className="lg:col-span-6 p-6 bg-[#121218] border-[#22222e]">
+          <div className="flex items-center justify-between pb-4 border-b border-[#22222e]">
             <div>
               <CardTitle>Active Savings Goals</CardTitle>
               <CardDescription>Target milestones and progress</CardDescription>
@@ -542,12 +542,12 @@ export default function DashboardPage() {
               metrics.goals_preview.map((goal) => (
                 <div
                   key={goal.id}
-                  className="p-3.5 rounded-xl bg-slate-950/60 border border-slate-800/80 space-y-2"
+                  className="p-3.5 rounded-xl bg-[#0b0b10] border border-[#22222e] space-y-2"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs font-semibold text-slate-200">{goal.name}</span>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs font-bold text-emerald-400 tabular-nums">
+                      <span className="text-xs font-bold text-purple-300 tabular-nums">
                         {formatCurrency(goal.current_amount, currencySymbol)} /{' '}
                         {formatCurrency(goal.target_amount, currencySymbol)}
                       </span>
@@ -562,11 +562,11 @@ export default function DashboardPage() {
                     </div>
                   </div>
 
-                  <div className="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                  <div className="w-full bg-[#1c1c28] h-2 rounded-full overflow-hidden">
                     <div
                       className="h-full rounded-full transition-all"
                       style={{
-                        backgroundColor: goal.color || '#10b981',
+                        backgroundColor: goal.color || '#8b5cf6',
                         width: `${Math.min(goal.progress_percentage, 100)}%`,
                       }}
                     />
@@ -586,8 +586,8 @@ export default function DashboardPage() {
       </div>
 
       {/* Recent Transactions List */}
-      <Card className="p-6 bg-slate-900/70 border-slate-800">
-        <div className="flex items-center justify-between pb-4 border-b border-slate-800/80">
+      <Card className="p-6 bg-[#121218] border-[#22222e]">
+        <div className="flex items-center justify-between pb-4 border-b border-[#22222e]">
           <div>
             <CardTitle>Recent Transactions</CardTitle>
             <CardDescription>Latest entries logged in your account</CardDescription>
@@ -604,16 +604,16 @@ export default function DashboardPage() {
           {metrics?.recent_transactions && metrics.recent_transactions.length > 0 ? (
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-800 text-slate-400">
+                <tr className="border-b border-[#22222e] text-slate-400">
                   <th className="pb-3 font-semibold">Description</th>
                   <th className="pb-3 font-semibold">Category</th>
                   <th className="pb-3 font-semibold">Date</th>
                   <th className="pb-3 font-semibold text-right">Amount</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/60">
+              <tbody className="divide-y divide-[#22222e]/60">
                 {metrics.recent_transactions.map((tx) => (
-                  <tr key={tx.id} className="hover:bg-slate-800/30 transition-colors">
+                  <tr key={tx.id} className="hover:bg-[#181824]/50 transition-colors">
                     <td className="py-3 font-medium text-slate-200">{tx.description}</td>
                     <td className="py-3">
                       <Badge variant="neutral" className="text-[10px]">
@@ -623,7 +623,7 @@ export default function DashboardPage() {
                     <td className="py-3 text-slate-400">{formatDate(tx.date)}</td>
                     <td
                       className={`py-3 text-right font-bold tabular-nums ${
-                        tx.type === 'income' ? 'text-emerald-400' : 'text-slate-200'
+                        tx.type === 'income' ? 'text-purple-300' : 'text-slate-200'
                       }`}
                     >
                       {tx.type === 'income' ? '+' : '-'}

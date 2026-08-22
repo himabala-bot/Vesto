@@ -2,22 +2,23 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'emerald';
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'purple' | 'emerald';
   size?: 'sm' | 'md' | 'lg' | 'icon';
   isLoading?: boolean;
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ className, variant = 'primary', size = 'md', isLoading = false, children, disabled, ...props }, ref) => {
-    const baseStyles = 'inline-flex items-center justify-center font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-emerald-500/50 disabled:pointer-events-none disabled:opacity-50 select-none cursor-pointer rounded-xl';
+    const baseStyles = 'inline-flex items-center justify-center font-medium transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-500/50 disabled:pointer-events-none disabled:opacity-50 select-none cursor-pointer rounded-xl';
 
     const variants = {
-      primary: 'bg-white text-slate-950 hover:bg-slate-200 font-semibold shadow-sm active:scale-[0.98]',
-      secondary: 'bg-slate-800/80 text-slate-100 hover:bg-slate-700/80 border border-slate-700/60 active:scale-[0.98]',
-      outline: 'border border-slate-700 bg-transparent text-slate-200 hover:bg-slate-800/60 hover:text-white',
-      ghost: 'text-slate-400 hover:text-slate-100 hover:bg-slate-800/50',
+      primary: 'bg-purple-600 hover:bg-purple-500 text-white font-semibold shadow-md shadow-purple-900/30 border border-purple-500/40 active:scale-[0.98]',
+      purple: 'bg-purple-600 hover:bg-purple-500 text-white font-semibold shadow-md shadow-purple-900/30 border border-purple-500/40 active:scale-[0.98]',
+      secondary: 'bg-[#181824] text-slate-100 hover:bg-[#232332] border border-[#2a2a3c] active:scale-[0.98]',
+      outline: 'border border-[#2a2a3c] bg-transparent text-slate-200 hover:bg-[#181824] hover:border-purple-500/40 hover:text-white',
+      ghost: 'text-slate-400 hover:text-slate-100 hover:bg-[#181824]',
       danger: 'bg-rose-500/10 text-rose-400 border border-rose-500/30 hover:bg-rose-500/20 active:scale-[0.98]',
-      emerald: 'bg-emerald-500 text-slate-950 font-semibold hover:bg-emerald-400 shadow-sm shadow-emerald-500/20 active:scale-[0.98]',
+      emerald: 'bg-purple-600 hover:bg-purple-500 text-white font-semibold shadow-md shadow-purple-900/30 border border-purple-500/40 active:scale-[0.98]',
     };
 
     const sizes = {

@@ -18,12 +18,12 @@ interface AddGoalModalProps {
 }
 
 const COLOR_OPTIONS = [
-  { label: 'Emerald Green', value: '#10b981' },
+  { label: 'Purple Violet', value: '#8b5cf6' },
   { label: 'Indigo Blue', value: '#6366f1' },
   { label: 'Cyan Sky', value: '#06b6d4' },
+  { label: 'Emerald Green', value: '#10b981' },
   { label: 'Amber Gold', value: '#f59e0b' },
   { label: 'Rose Pink', value: '#f43f5e' },
-  { label: 'Purple Violet', value: '#a855f7' },
 ];
 
 const ICON_OPTIONS = [
@@ -49,7 +49,7 @@ export function AddGoalModal({
   const [currentAmount, setCurrentAmount] = useState('');
   const [targetDate, setTargetDate] = useState('');
   const [icon, setIcon] = useState('target');
-  const [color, setColor] = useState('#10b981');
+  const [color, setColor] = useState('#8b5cf6');
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
@@ -60,14 +60,14 @@ export function AddGoalModal({
         setCurrentAmount(String(editGoal.current_amount));
         setTargetDate(editGoal.target_date || '');
         setIcon(editGoal.icon || 'target');
-        setColor(editGoal.color || '#10b981');
+        setColor(editGoal.color || '#8b5cf6');
       } else {
         setName('');
         setTargetAmount('');
         setCurrentAmount('0.00');
         setTargetDate('');
         setIcon('target');
-        setColor('#10b981');
+        setColor('#8b5cf6');
       }
     }
   }, [isOpen, editGoal]);
@@ -181,11 +181,11 @@ export function AddGoalModal({
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-2 pt-3 border-t border-slate-800/80">
+        <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#22222e]">
           <Button type="button" variant="outline" size="sm" onClick={onClose}>
             Cancel
           </Button>
-          <Button type="submit" variant="emerald" size="sm" isLoading={isLoading}>
+          <Button type="submit" variant="purple" size="sm" isLoading={isLoading}>
             {editGoal ? 'Save Changes' : 'Establish Goal'}
           </Button>
         </div>

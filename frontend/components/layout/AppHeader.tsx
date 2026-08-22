@@ -40,12 +40,12 @@ export function AppHeader({ onOpenAddTransaction }: AppHeaderProps) {
 
   return (
     <>
-      <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-slate-800/80 bg-slate-950/80 px-4 md:px-8 backdrop-blur-md">
+      <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-[#22222e] bg-[#08080c]/80 px-4 md:px-8 backdrop-blur-md">
         <div className="flex items-center gap-3">
           {/* Mobile Menu Button */}
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-800 hover:text-slate-200 lg:hidden"
+            className="rounded-lg p-1.5 text-slate-400 hover:bg-[#181824] hover:text-slate-200 lg:hidden"
           >
             {mobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
           </button>
@@ -60,7 +60,7 @@ export function AppHeader({ onOpenAddTransaction }: AppHeaderProps) {
           <MonthPicker />
 
           <Button
-            variant="emerald"
+            variant="purple"
             size="sm"
             onClick={onOpenAddTransaction}
             className="hidden sm:inline-flex"
@@ -70,7 +70,7 @@ export function AppHeader({ onOpenAddTransaction }: AppHeaderProps) {
           </Button>
 
           <Button
-            variant="emerald"
+            variant="purple"
             size="icon"
             onClick={onOpenAddTransaction}
             className="sm:hidden h-8 w-8"
@@ -82,7 +82,7 @@ export function AppHeader({ onOpenAddTransaction }: AppHeaderProps) {
 
       {/* Mobile Drawer Menu */}
       {mobileMenuOpen && (
-        <div className="fixed inset-0 z-40 bg-slate-950/95 lg:hidden pt-16 px-6 pb-6 animate-in slide-in-from-top-4 duration-200">
+        <div className="fixed inset-0 z-40 bg-[#08080c]/95 lg:hidden pt-16 px-6 pb-6 animate-in slide-in-from-top-4 duration-200">
           <nav className="space-y-2 mt-4">
             {MOBILE_NAV_ITEMS.map((item) => {
               const Icon = item.icon;
@@ -95,8 +95,8 @@ export function AppHeader({ onOpenAddTransaction }: AppHeaderProps) {
                   className={cn(
                     'flex items-center gap-3 px-4 py-3 rounded-xl text-base font-medium transition-colors',
                     isActive
-                      ? 'bg-slate-800 text-emerald-400 font-semibold'
-                      : 'text-slate-300 hover:bg-slate-900'
+                      ? 'bg-purple-500/15 text-purple-300 border border-purple-500/30 font-semibold'
+                      : 'text-slate-300 hover:bg-[#181824]'
                   )}
                 >
                   <Icon className="h-5 w-5" />

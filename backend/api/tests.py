@@ -30,7 +30,8 @@ class VestoBackendTests(TestCase):
     def test_default_categories_and_profile_created(self):
         profile = UserProfile.objects.filter(user=self.user).first()
         self.assertIsNotNone(profile)
-        self.assertEqual(profile.currency_symbol, '$')
+        self.assertEqual(profile.currency_symbol, '₹')
+        self.assertEqual(profile.currency, 'INR')
 
         categories = Category.objects.filter(user=self.user)
         self.assertGreater(categories.count(), 5)
