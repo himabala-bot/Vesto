@@ -61,13 +61,13 @@ export function AddTransactionModal({
   const loadCategories = async () => {
     try {
       const data = await api.categories.getAll();
-      setCategories(data);
+      setCategories(Array.isArray(data) ? data : []);
     } catch {
-      // Handled silently
+      setCategories([]);
     }
   };
 
-  const filteredCategories = categories.filter((c) => c.type === type);
+  const filteredCategories = (Array.isArray(categories) ? categories : []).filter((c) => c.type === type);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

@@ -45,9 +45,10 @@ export function SetBudgetModal({
   const loadExpenseCategories = async () => {
     try {
       const data = await api.categories.getAll();
-      setCategories(data.filter((c) => c.type === 'expense'));
+      const list = Array.isArray(data) ? data : [];
+      setCategories(list.filter((c) => c.type === 'expense'));
     } catch {
-      // Handled silently
+      setCategories([]);
     }
   };
 

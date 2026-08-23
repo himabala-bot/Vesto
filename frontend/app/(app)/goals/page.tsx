@@ -41,9 +41,10 @@ export default function GoalsPage() {
     setIsLoading(true);
     try {
       const data = await api.goals.getAll();
-      setGoals(data);
+      setGoals(Array.isArray(data) ? data : []);
     } catch {
       toast.error('Failed to load savings goals');
+      setGoals([]);
     } finally {
       setIsLoading(false);
     }

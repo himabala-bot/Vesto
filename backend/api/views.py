@@ -101,6 +101,7 @@ class UserProfileSettingsView(generics.RetrieveUpdateAPIView):
 class CategoryViewSet(viewsets.ModelViewSet):
     serializer_class = CategorySerializer
     permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = None
 
     def get_queryset(self):
         # User sees their custom categories and default categories assigned to them
@@ -119,6 +120,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
 class TransactionViewSet(viewsets.ModelViewSet):
     serializer_class = TransactionSerializer
     permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = None
 
     def get_queryset(self):
         qs = Transaction.objects.filter(user=self.request.user).select_related('category')
@@ -161,6 +163,7 @@ class TransactionViewSet(viewsets.ModelViewSet):
 class BudgetViewSet(viewsets.ModelViewSet):
     serializer_class = BudgetSerializer
     permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = None
 
     def get_queryset(self):
         month = self.request.query_params.get('month')
@@ -228,6 +231,7 @@ class BudgetViewSet(viewsets.ModelViewSet):
 class SavingsGoalViewSet(viewsets.ModelViewSet):
     serializer_class = SavingsGoalSerializer
     permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = None
 
     def get_queryset(self):
         return SavingsGoal.objects.filter(user=self.request.user).prefetch_related('contributions').order_by('-created_at')
@@ -293,6 +297,7 @@ class SavingsGoalViewSet(viewsets.ModelViewSet):
 class RecurringExpenseViewSet(viewsets.ModelViewSet):
     serializer_class = RecurringExpenseSerializer
     permission_classes = (permissions.IsAuthenticated,)
+    pagination_class = None
 
     def get_queryset(self):
         return RecurringExpense.objects.filter(user=self.request.user).select_related('category').order_by('due_day', 'name')

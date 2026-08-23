@@ -54,9 +54,10 @@ export default function TransactionsPage() {
       if (categoryFilter) params.category_id = categoryFilter;
 
       const res = await api.transactions.getAll(params);
-      setTransactions(res.results || res);
+      setTransactions(Array.isArray(res) ? res : []);
     } catch {
       toast.error('Failed to load transactions');
+      setTransactions([]);
     } finally {
       setIsLoading(false);
     }
@@ -65,9 +66,9 @@ export default function TransactionsPage() {
   const fetchCategories = async () => {
     try {
       const data = await api.categories.getAll();
-      setCategories(data);
+      setCategories(Array.isArray(data) ? data : []);
     } catch {
-      // Ignore
+      setCategories([]);
     }
   };
 

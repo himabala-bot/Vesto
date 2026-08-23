@@ -1,4 +1,15 @@
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api';
+const getApiBaseUrl = () => {
+  let base = (process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api').trim();
+  // Strip trailing slashes
+  base = base.replace(/\/+$/, '');
+  // If user provided base domain without /api (e.g., https://vesto-backend.onrender.com), append /api
+  if (!base.endsWith('/api')) {
+    base = `${base}/api`;
+  }
+  return base;
+};
+
+const API_BASE_URL = getApiBaseUrl();
 
 class ApiClient {
   private getAuthToken(): string | null {
@@ -59,10 +70,21 @@ class ApiClient {
         return {} as T;
       }
 
-      const data = await response.json();
+      let data: any;
+      const text = await response.text();
+      try {
+        data = text ? JSON.parse(text) : {};
+      } catch {
+        data = { error: text || `HTTP ${response.status} Error` };
+      }
 
       if (!response.ok) {
-        const errorMsg = data.detail || data.error || data.message || Object.values(data)[0] || 'An error occurred';
+        const errorMsg =
+          data?.detail ||
+          data?.error ||
+          data?.message ||
+          (typeof data === 'object' && Object.values(data)[0]) ||
+          `Request failed with status ${response.status}`;
         throw new Error(typeof errorMsg === 'string' ? errorMsg : JSON.stringify(errorMsg));
       }
 
@@ -135,7 +157,10 @@ class ApiClient {
 
   // Categories
   categories = {
-    getAll: () => this.request<any[]>('/categories/'),
+    getAll: async (): Promise<any[]> => {
+      const res = await this.request<any>('/categories/');
+      return Array.isArray(res) ? res : (res?.results || []);
+    },
     create: (data: any) =>
       this.request<any>('/categories/', {
         method: 'POST',
@@ -154,7 +179,7 @@ class ApiClient {
 
   // Transactions
   transactions = {
-    getAll: (params?: Record<string, string | number | undefined>) => {
+    getAll: async (params?: Record<string, string | number | undefined>) => {
       const searchParams = new URLSearchParams();
       if (params) {
         Object.entries(params).forEach(([key, val]) => {
@@ -164,7 +189,10 @@ class ApiClient {
         });
       }
       const query = searchParams.toString();
-      return this.request<any>(`/transactions/${query ? `?${query}` : ''}`);
+      const res = await this.request<any>(`/transactions/${query ? `?${query}` : ''}`);
+      if (Array.isArray(res)) return res;
+      if (res && Array.isArray(res.results)) return res.results;
+      return [];
     },
     create: (data: any) =>
       this.request<any>('/transactions/', {
@@ -184,9 +212,10 @@ class ApiClient {
 
   // Budgets
   budgets = {
-    getAll: (month?: string) => {
+    getAll: async (month?: string): Promise<any[]> => {
       const query = month ? `?month=${month}` : '';
-      return this.request<any[]>(`/budgets/${query}`);
+      const res = await this.request<any>(`/budgets/${query}`);
+      return Array.isArray(res) ? res : (res?.results || []);
     },
     create: (data: any) =>
       this.request<any>('/budgets/', {
@@ -211,7 +240,10 @@ class ApiClient {
 
   // Savings Goals
   goals = {
-    getAll: () => this.request<any[]>('/goals/'),
+    getAll: async (): Promise<any[]> => {
+      const res = await this.request<any>('/goals/');
+      return Array.isArray(res) ? res : (res?.results || []);
+    },
     create: (data: any) =>
       this.request<any>('/goals/', {
         method: 'POST',
@@ -235,7 +267,10 @@ class ApiClient {
 
   // Recurring Expenses
   recurring = {
-    getAll: () => this.request<any[]>('/recurring/'),
+    getAll: async (): Promise<any[]> => {
+      const res = await this.request<any>('/recurring/');
+      return Array.isArray(res) ? res : (res?.results || []);
+    },
     create: (data: any) =>
       this.request<any>('/recurring/', {
         method: 'POST',

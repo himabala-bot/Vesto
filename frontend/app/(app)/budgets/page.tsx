@@ -27,9 +27,10 @@ export default function BudgetsPage() {
     setIsLoading(true);
     try {
       const data = await api.budgets.getAll(selectedMonth);
-      setBudgets(data);
+      setBudgets(Array.isArray(data) ? data : []);
     } catch {
       toast.error('Failed to load budgets');
+      setBudgets([]);
     } finally {
       setIsLoading(false);
     }

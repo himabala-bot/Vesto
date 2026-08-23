@@ -74,7 +74,7 @@ export default function InsightsPage() {
   const momChange = curr?.mom_change_percentage || 0;
   const isSpendingUp = momChange > 0;
 
-  const pieData = (insights?.category_insights || []).map((cat) => ({
+  const pieData = (Array.isArray(insights?.category_insights) ? insights.category_insights : []).map((cat) => ({
     name: cat.name,
     value: cat.amount,
     color: cat.color,

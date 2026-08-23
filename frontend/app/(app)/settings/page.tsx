@@ -69,9 +69,9 @@ export default function SettingsPage() {
   const loadCategories = async () => {
     try {
       const data = await api.categories.getAll();
-      setCategories(data);
+      setCategories(Array.isArray(data) ? data : []);
     } catch {
-      // Ignore
+      setCategories([]);
     }
   };
 

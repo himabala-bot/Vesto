@@ -38,9 +38,10 @@ export default function RecurringPage() {
     setIsLoading(true);
     try {
       const data = await api.recurring.getAll();
-      setRecurringList(data);
+      setRecurringList(Array.isArray(data) ? data : []);
     } catch {
       toast.error('Failed to load recurring bills');
+      setRecurringList([]);
     } finally {
       setIsLoading(false);
     }

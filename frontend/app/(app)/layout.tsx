@@ -47,13 +47,15 @@ export default function AppLayout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
-        <AddTransactionModal
-          isOpen={isAddTxOpen}
-          onClose={() => setIsAddTxOpen(false)}
-          onSuccess={() => {
-            triggerRefresh();
-          }}
-        />
+        {isAddTxOpen && (
+          <AddTransactionModal
+            isOpen={isAddTxOpen}
+            onClose={() => setIsAddTxOpen(false)}
+            onSuccess={() => {
+              triggerRefresh();
+            }}
+          />
+        )}
       </GlobalModalContext.Provider>
     </AuthGuard>
   );
