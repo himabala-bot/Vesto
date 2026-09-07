@@ -104,7 +104,7 @@ export default function DashboardPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-            Hello, {user?.first_name || user?.username}! 👋
+            Hello, {user?.first_name || user?.username}!
           </h2>
           <p className="text-xs sm:text-sm text-slate-400 mt-0.5">
             Here is your financial status for <span className="text-purple-300 font-medium">{metrics?.month_label}</span>.
@@ -174,15 +174,14 @@ export default function DashboardPage() {
 
 
       <Card
-        className={`p-6 sm:p-8 relative overflow-hidden transition-all ${
-          safe?.status === 'on_track'
+        className={`p-6 sm:p-8 relative overflow-hidden transition-all ${safe?.status === 'on_track'
             ? 'border-purple-500/40 safe-glow-purple bg-gradient-to-br from-[#121218] via-[#141420] to-purple-950/20'
             : safe?.status === 'caution'
-            ? 'border-amber-500/40 safe-glow-amber bg-gradient-to-br from-[#121218] via-[#141420] to-amber-950/20'
-            : safe?.status === 'exceeded'
-            ? 'border-rose-500/40 safe-glow-rose bg-gradient-to-br from-[#121218] via-[#141420] to-rose-950/20'
-            : 'border-[#22222e] bg-[#121218]'
-        }`}
+              ? 'border-amber-500/40 safe-glow-amber bg-gradient-to-br from-[#121218] via-[#141420] to-amber-950/20'
+              : safe?.status === 'exceeded'
+                ? 'border-rose-500/40 safe-glow-rose bg-gradient-to-br from-[#121218] via-[#141420] to-rose-950/20'
+                : 'border-[#22222e] bg-[#121218]'
+          }`}
       >
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
@@ -195,10 +194,10 @@ export default function DashboardPage() {
                   safe?.status === 'on_track'
                     ? 'purple'
                     : safe?.status === 'caution'
-                    ? 'warning'
-                    : safe?.status === 'exceeded'
-                    ? 'danger'
-                    : 'neutral'
+                      ? 'warning'
+                      : safe?.status === 'exceeded'
+                        ? 'danger'
+                        : 'neutral'
                 }
               >
                 {safe?.status === 'on_track' && <CheckCircle2 className="h-3 w-3" />}
@@ -208,10 +207,10 @@ export default function DashboardPage() {
                   {safe?.status === 'on_track'
                     ? 'On Track'
                     : safe?.status === 'caution'
-                    ? 'Caution'
-                    : safe?.status === 'exceeded'
-                    ? 'Limit Reached'
-                    : 'Ready to Configure'}
+                      ? 'Caution'
+                      : safe?.status === 'exceeded'
+                        ? 'Limit Reached'
+                        : 'Ready to Configure'}
                 </span>
               </Badge>
             </div>
@@ -430,13 +429,12 @@ export default function DashboardPage() {
                     {cat.budget > 0 && (
                       <div className="w-full bg-[#1c1c28] h-1.5 rounded-full overflow-hidden">
                         <div
-                          className={`h-full rounded-full transition-all ${
-                            cat.percentage > 100
+                          className={`h-full rounded-full transition-all ${cat.percentage > 100
                               ? 'bg-rose-500'
                               : cat.percentage > 80
-                              ? 'bg-amber-500'
-                              : 'bg-purple-500'
-                          }`}
+                                ? 'bg-amber-500'
+                                : 'bg-purple-500'
+                            }`}
                           style={{ width: `${Math.min(cat.percentage, 100)}%` }}
                         />
                       </div>
@@ -622,9 +620,8 @@ export default function DashboardPage() {
                     </td>
                     <td className="py-3 text-slate-400">{formatDate(tx.date)}</td>
                     <td
-                      className={`py-3 text-right font-bold tabular-nums ${
-                        tx.type === 'income' ? 'text-purple-300' : 'text-slate-200'
-                      }`}
+                      className={`py-3 text-right font-bold tabular-nums ${tx.type === 'income' ? 'text-purple-300' : 'text-slate-200'
+                        }`}
                     >
                       {tx.type === 'income' ? '+' : '-'}
                       {formatCurrency(tx.amount, currencySymbol)}
