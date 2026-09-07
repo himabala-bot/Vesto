@@ -46,11 +46,11 @@ class RegisterView(generics.CreateAPIView):
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         user = serializer.save()
-        
-        # Generate token pair for instant login upon registration
+
+
         from rest_framework_simplejwt.tokens import RefreshToken
         refresh = RefreshToken.for_user(user)
-        
+
         return Response({
             'user': UserSerializer(user).data,
             'access': str(refresh.access_token),
@@ -104,7 +104,7 @@ class CategoryViewSet(viewsets.ModelViewSet):
     pagination_class = None
 
     def get_queryset(self):
-        # User sees their custom categories and default categories assigned to them
+
         return Category.objects.filter(Q(user=self.request.user) | Q(user__isnull=True)).distinct().order_by('type', 'name')
 
     def perform_create(self, serializer):
@@ -124,8 +124,8 @@ class TransactionViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         qs = Transaction.objects.filter(user=self.request.user).select_related('category')
-        
-        # Filtering
+
+
         month = self.request.query_params.get('month')
         if month:
             try:
@@ -172,10 +172,10 @@ class BudgetViewSet(viewsets.ModelViewSet):
             month = f"{now.year:04d}-{now.month:02d}"
 
         year, m, start_date, end_date, _ = parse_month(month)
-        
-        # Calculate spent for each budget in this month
+
+
         budgets = Budget.objects.filter(user=self.request.user, month=month).select_related('category')
-        
+
         for b in budgets:
             spent = (
                 Transaction.objects.filter(
@@ -254,7 +254,7 @@ class SavingsGoalViewSet(viewsets.ModelViewSet):
         except Exception:
             return Response({'error': 'Valid positive amount is required.'}, status=status.HTTP_400_BAD_REQUEST)
 
-        # 1. Add contribution
+
         contribution = GoalContribution.objects.create(
             goal=goal,
             amount=amount,
@@ -262,15 +262,15 @@ class SavingsGoalViewSet(viewsets.ModelViewSet):
             notes=notes
         )
 
-        # 2. Update goal current amount
+
         goal.current_amount += amount
         if goal.current_amount >= goal.target_amount:
             goal.is_completed = True
         goal.save()
 
-        # 3. Optionally create a matching transaction
+
         if log_transaction:
-            # Check or create a "Savings & Investments" category
+
             savings_cat, _ = Category.objects.get_or_create(
                 user=request.user,
                 name="Savings Goal Contribution",
@@ -311,7 +311,7 @@ class RecurringExpenseViewSet(viewsets.ModelViewSet):
         today = timezone.now().date()
         date_str = request.data.get('date') or today.isoformat()
 
-        # Create real transaction
+
         tx = Transaction.objects.create(
             user=request.user,
             category=recurring.category,
@@ -323,7 +323,7 @@ class RecurringExpenseViewSet(viewsets.ModelViewSet):
             is_recurring_instance=True
         )
 
-        # Update last logged date
+
         recurring.last_logged_date = today
         recurring.save()
 

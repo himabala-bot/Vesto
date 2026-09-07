@@ -42,7 +42,7 @@ export function AppHeader({ onOpenAddTransaction }: AppHeaderProps) {
     <>
       <header className="sticky top-0 z-30 flex h-16 w-full items-center justify-between border-b border-[#22222e] bg-[#08080c]/80 px-4 md:px-8 backdrop-blur-md">
         <div className="flex items-center gap-3">
-          {/* Mobile Menu Button */}
+
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="rounded-lg p-1.5 text-slate-400 hover:bg-[#181824] hover:text-slate-200 lg:hidden"
@@ -55,7 +55,7 @@ export function AppHeader({ onOpenAddTransaction }: AppHeaderProps) {
           </div>
         </div>
 
-        {/* Right action group */}
+
         <div className="flex items-center gap-3">
           <MonthPicker />
 
@@ -80,7 +80,7 @@ export function AppHeader({ onOpenAddTransaction }: AppHeaderProps) {
         </div>
       </header>
 
-      {/* Mobile Drawer Menu */}
+
       {mobileMenuOpen && (
         <div className="fixed inset-0 z-40 bg-[#08080c]/95 lg:hidden pt-16 px-6 pb-6 animate-in slide-in-from-top-4 duration-200">
           <nav className="space-y-2 mt-4">

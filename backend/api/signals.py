@@ -28,10 +28,10 @@ DEFAULT_INCOME_CATEGORIES = [
 @receiver(post_save, sender=User)
 def create_user_defaults(sender, instance, created, **kwargs):
     if created:
-        # Create user profile
+
         UserProfile.objects.get_or_create(user=instance)
 
-        # Create user-specific default categories so user can freely customize/edit them
+
         for item in DEFAULT_EXPENSE_CATEGORIES:
             Category.objects.get_or_create(
                 user=instance,

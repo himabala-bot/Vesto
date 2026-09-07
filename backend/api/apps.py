@@ -33,11 +33,11 @@ class ApiConfig(AppConfig):
             else:
                 print("ℹ️ Admin superuser already exists.")
 
-        # Connect to post_migrate to run after any migrations
+
         post_migrate.connect(_create_admin_user, sender=self.__class__)
 
-        # Also invoke immediately in case there are no pending migrations
+
         _create_admin_user(sender=self.__class__)
 
-        # Load other app signals
+
         import api.signals

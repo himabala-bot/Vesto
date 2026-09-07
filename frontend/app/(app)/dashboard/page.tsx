@@ -100,7 +100,7 @@ export default function DashboardPage() {
 
   return (
     <div className="space-y-6">
-      {/* Welcome Banner */}
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
@@ -119,7 +119,7 @@ export default function DashboardPage() {
         </div>
       </div>
 
-      {/* Onboarding checklist for new users */}
+
       {isNewUser && (
         <Card className="border-purple-500/30 bg-purple-950/10 p-5 sm:p-6">
           <div className="flex items-start gap-4">
@@ -172,7 +172,7 @@ export default function DashboardPage() {
         </Card>
       )}
 
-      {/* Hero Safe to Spend Spotlight */}
+
       <Card
         className={`p-6 sm:p-8 relative overflow-hidden transition-all ${
           safe?.status === 'on_track'
@@ -228,7 +228,7 @@ export default function DashboardPage() {
             </p>
           </div>
 
-          {/* Quick Metrics & Toggle Breakdown */}
+
           <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
             <div className="rounded-2xl bg-[#0b0b10] p-4 border border-[#22222e] text-center sm:text-left min-w-[140px]">
               <span className="text-[11px] font-medium text-slate-400">This Week</span>
@@ -256,7 +256,7 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Expandable Formula Math breakdown */}
+
         {showSafeBreakdown && (
           <div className="mt-6 pt-6 border-t border-[#22222e] grid grid-cols-2 sm:grid-cols-4 gap-4 text-xs animate-in fade-in-50 duration-200">
             <div className="p-3 rounded-xl bg-[#0b0b10]/60 border border-[#22222e]">
@@ -287,9 +287,9 @@ export default function DashboardPage() {
         )}
       </Card>
 
-      {/* 4 Key Stat Cards */}
+
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* All-Time Balance */}
+
         <Card className="p-5 bg-[#121218] border-[#22222e]">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Total Lifetime Balance</span>
@@ -301,7 +301,7 @@ export default function DashboardPage() {
           <p className="text-[11px] text-slate-500 mt-1">Net of all historical income & expenses</p>
         </Card>
 
-        {/* Month Income */}
+
         <Card className="p-5 bg-[#121218] border-[#22222e]">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Month Income</span>
@@ -313,7 +313,7 @@ export default function DashboardPage() {
           <p className="text-[11px] text-slate-500 mt-1">Received in {metrics?.month_label}</p>
         </Card>
 
-        {/* Month Expense */}
+
         <Card className="p-5 bg-[#121218] border-[#22222e]">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Month Outflow</span>
@@ -325,7 +325,7 @@ export default function DashboardPage() {
           <p className="text-[11px] text-slate-500 mt-1">Expenses recorded this month</p>
         </Card>
 
-        {/* Net Savings Rate */}
+
         <Card className="p-5 bg-[#121218] border-[#22222e]">
           <div className="flex items-center justify-between text-xs text-slate-400">
             <span>Savings Rate</span>
@@ -340,9 +340,9 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      {/* Charts & Spending Grid */}
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Left: Cashflow 6-Month Trend Chart */}
+
         <Card className="lg:col-span-8 p-6 bg-[#121218] border-[#22222e]">
           <div className="flex items-center justify-between pb-4 border-b border-[#22222e]">
             <div>
@@ -390,7 +390,7 @@ export default function DashboardPage() {
           </div>
         </Card>
 
-        {/* Right: Spending by Category */}
+
         <Card className="lg:col-span-4 p-6 bg-[#121218] border-[#22222e] flex flex-col justify-between">
           <div>
             <div className="flex items-center justify-between pb-4 border-b border-[#22222e]">
@@ -456,9 +456,9 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      {/* Bottom Grid: Upcoming Recurring & Savings Goals */}
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Upcoming Bills */}
+
         <Card className="lg:col-span-6 p-6 bg-[#121218] border-[#22222e]">
           <div className="flex items-center justify-between pb-4 border-b border-[#22222e]">
             <div>
@@ -522,7 +522,7 @@ export default function DashboardPage() {
           </div>
         </Card>
 
-        {/* Savings Goals Preview */}
+
         <Card className="lg:col-span-6 p-6 bg-[#121218] border-[#22222e]">
           <div className="flex items-center justify-between pb-4 border-b border-[#22222e]">
             <div>
@@ -585,7 +585,7 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      {/* Recent Transactions List */}
+
       <Card className="p-6 bg-[#121218] border-[#22222e]">
         <div className="flex items-center justify-between pb-4 border-b border-[#22222e]">
           <div>
@@ -644,7 +644,7 @@ export default function DashboardPage() {
         </div>
       </Card>
 
-      {/* Quick Goal Contribution Modal */}
+
       <ContributeGoalModal
         isOpen={!!selectedGoalForContribution}
         onClose={() => setSelectedGoalForContribution(null)}

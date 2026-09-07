@@ -34,12 +34,12 @@ export default function TransactionsPage() {
   const [categories, setCategories] = useState<Category[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Filters
+
   const [search, setSearch] = useState<string>('');
   const [typeFilter, setTypeFilter] = useState<string>('');
   const [categoryFilter, setCategoryFilter] = useState<string>('');
 
-  // Modals
+
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [editingTransaction, setEditingTransaction] = useState<Transaction | null>(null);
 
@@ -92,7 +92,7 @@ export default function TransactionsPage() {
     }
   };
 
-  // Calculations for filtered list
+
   const totalIncome = transactions
     .filter((t) => t.type === 'income')
     .reduce((acc, t) => acc + Number(t.amount), 0);
@@ -133,7 +133,7 @@ export default function TransactionsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header with Title and Actions */}
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Transactions</h2>
@@ -162,10 +162,10 @@ export default function TransactionsPage() {
         </div>
       </div>
 
-      {/* Filter and Summary Bar */}
+
       <Card className="p-4 sm:p-5 bg-[#121218] border-[#22222e] space-y-4">
         <div className="grid grid-cols-1 sm:grid-cols-12 gap-3">
-          {/* Search Box */}
+
           <div className="sm:col-span-6">
             <Input
               placeholder="Search description, category, or notes..."
@@ -175,7 +175,7 @@ export default function TransactionsPage() {
             />
           </div>
 
-          {/* Type Filter */}
+
           <div className="sm:col-span-3">
             <Select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
               <option value="">All Types (Income & Expense)</option>
@@ -184,7 +184,7 @@ export default function TransactionsPage() {
             </Select>
           </div>
 
-          {/* Category Filter */}
+
           <div className="sm:col-span-3">
             <Select value={categoryFilter} onChange={(e) => setCategoryFilter(e.target.value)}>
               <option value="">All Categories</option>
@@ -197,7 +197,7 @@ export default function TransactionsPage() {
           </div>
         </div>
 
-        {/* Ledger Summary Stats */}
+
         <div className="grid grid-cols-3 gap-3 pt-3 border-t border-[#22222e] text-center sm:text-left">
           <div className="p-2 sm:p-3 rounded-xl bg-[#0b0b10] border border-[#22222e]">
             <span className="text-[11px] font-medium text-slate-400">Total Filtered Inflow</span>
@@ -226,7 +226,7 @@ export default function TransactionsPage() {
         </div>
       </Card>
 
-      {/* Transactions Table */}
+
       <Card className="p-0 bg-[#121218] border-[#22222e] overflow-hidden">
         {isLoading ? (
           <div className="flex h-64 items-center justify-center">
@@ -320,7 +320,7 @@ export default function TransactionsPage() {
         )}
       </Card>
 
-      {/* Add / Edit Transaction Modal */}
+
       <AddTransactionModal
         isOpen={isAddModalOpen}
         onClose={() => {

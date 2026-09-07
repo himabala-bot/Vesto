@@ -26,8 +26,8 @@ class Category(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='categories', null=True, blank=True)
     name = models.CharField(max_length=100)
     type = models.CharField(max_length=10, choices=CATEGORY_TYPES, default='expense')
-    icon = models.CharField(max_length=50, default='tag')  # Lucide icon name
-    color = models.CharField(max_length=30, default='#64748b')  # Hex color or slate token
+    icon = models.CharField(max_length=50, default='tag')
+    color = models.CharField(max_length=30, default='#64748b')
     is_default = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
 
@@ -67,7 +67,7 @@ class Budget(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='budgets')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='budgets')
     amount = models.DecimalField(max_digits=12, decimal_places=2)
-    month = models.CharField(max_length=7)  # Format 'YYYY-MM'
+    month = models.CharField(max_length=7)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
@@ -131,7 +131,7 @@ class RecurringExpense(models.Model):
     name = models.CharField(max_length=150)
     amount = models.DecimalField(max_digits=12, decimal_places=2)
     frequency = models.CharField(max_length=15, choices=FREQUENCY_CHOICES, default='monthly')
-    due_day = models.IntegerField(default=1)  # 1-31 for monthly, 1-7 for weekly
+    due_day = models.IntegerField(default=1)
     next_due_date = models.DateField(null=True, blank=True)
     is_active = models.BooleanField(default=True)
     last_logged_date = models.DateField(null=True, blank=True)

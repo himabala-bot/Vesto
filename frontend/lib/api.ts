@@ -1,8 +1,8 @@
 const getApiBaseUrl = () => {
   let base = (process.env.NEXT_PUBLIC_API_URL || 'http://127.0.0.1:8000/api').trim();
-  // Strip trailing slashes
+
   base = base.replace(/\/+$/, '');
-  // If user provided base domain without /api (e.g., https://vesto-backend.onrender.com), append /api
+
   if (!base.endsWith('/api')) {
     base = `${base}/api`;
   }
@@ -54,7 +54,7 @@ class ApiClient {
         headers,
       });
 
-      // Handle 401 Unauthorized (attempt refresh)
+
       if (response.status === 401 && this.getRefreshToken() && !endpoint.includes('/auth/')) {
         const refreshed = await this.refreshToken();
         if (refreshed) {
@@ -125,7 +125,7 @@ class ApiClient {
     }
   }
 
-  // Auth Endpoints
+
   auth = {
     login: (credentials: { username?: string; email?: string; password: string }) =>
       this.request<{ access: string; refresh: string; user: any }>('/auth/login/', {
@@ -145,7 +145,7 @@ class ApiClient {
       }),
   };
 
-  // Settings
+
   settings = {
     get: () => this.request<any>('/settings/'),
     update: (data: any) =>
@@ -155,7 +155,7 @@ class ApiClient {
       }),
   };
 
-  // Categories
+
   categories = {
     getAll: async (): Promise<any[]> => {
       const res = await this.request<any>('/categories/');
@@ -177,7 +177,7 @@ class ApiClient {
       }),
   };
 
-  // Transactions
+
   transactions = {
     getAll: async (params?: Record<string, string | number | undefined>) => {
       const searchParams = new URLSearchParams();
@@ -210,7 +210,7 @@ class ApiClient {
       }),
   };
 
-  // Budgets
+
   budgets = {
     getAll: async (month?: string): Promise<any[]> => {
       const query = month ? `?month=${month}` : '';
@@ -238,7 +238,7 @@ class ApiClient {
       }),
   };
 
-  // Savings Goals
+
   goals = {
     getAll: async (): Promise<any[]> => {
       const res = await this.request<any>('/goals/');
@@ -265,7 +265,7 @@ class ApiClient {
       }),
   };
 
-  // Recurring Expenses
+
   recurring = {
     getAll: async (): Promise<any[]> => {
       const res = await this.request<any>('/recurring/');
@@ -292,7 +292,7 @@ class ApiClient {
       }),
   };
 
-  // Analytics
+
   analytics = {
     getDashboard: (month?: string) => {
       const query = month ? `?month=${month}` : '';

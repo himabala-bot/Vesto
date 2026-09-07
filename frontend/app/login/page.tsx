@@ -24,7 +24,7 @@ export default function LoginPage() {
     try {
       await login({ username, password });
     } catch {
-      // toast shown in context
+
     } finally {
       setIsLoading(false);
     }
@@ -37,7 +37,7 @@ export default function LoginPage() {
     try {
       await login({ username: 'alex', password: 'vesto2026!' });
     } catch {
-      // If demo user doesn't exist yet, try login or register
+
     } finally {
       setIsLoading(false);
     }
@@ -46,7 +46,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12 bg-[#08080c]">
       <div className="w-full max-w-md space-y-6">
-        {/* Brand */}
+
         <div className="text-center">
           <Link href="/" className="inline-flex items-center gap-2.5 mb-4">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 via-violet-600 to-indigo-600 text-white font-black text-xl shadow-lg shadow-purple-600/30">
@@ -60,7 +60,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* Login Card */}
+
         <Card className="bg-[#121218] border-[#22222e] p-6 sm:p-8 shadow-xl">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>

@@ -82,7 +82,7 @@ export default function InsightsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
@@ -95,7 +95,7 @@ export default function InsightsPage() {
         </div>
       </div>
 
-      {/* MoM Performance Cards */}
+
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card className="p-5 bg-[#121218] border-[#22222e]">
           <span className="text-xs text-slate-400">Current Month Outflow</span>
@@ -144,7 +144,7 @@ export default function InsightsPage() {
         </Card>
       </div>
 
-      {/* Smart Alerts & Observations Banner */}
+
       {insights?.smart_alerts && insights.smart_alerts.length > 0 && (
         <div className="space-y-3">
           <h3 className="text-xs font-semibold uppercase tracking-wider text-slate-400">
@@ -204,7 +204,7 @@ export default function InsightsPage() {
         </div>
       )}
 
-      {/* Spending Velocity Comparison Chart */}
+
       <Card className="p-6 bg-[#121218] border-[#22222e]">
         <div className="flex items-center justify-between pb-4 border-b border-[#22222e]">
           <div>
@@ -267,9 +267,9 @@ export default function InsightsPage() {
         </div>
       </Card>
 
-      {/* Category Breakdown & MoM Shift Grid */}
+
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
-        {/* Donut Chart */}
+
         <Card className="lg:col-span-5 p-6 bg-[#121218] border-[#22222e] flex flex-col justify-between">
           <div>
             <div className="pb-4 border-b border-[#22222e]">
@@ -319,7 +319,7 @@ export default function InsightsPage() {
           </div>
         </Card>
 
-        {/* Detailed Category Table */}
+
         <Card className="lg:col-span-7 p-0 bg-[#121218] border-[#22222e] overflow-hidden">
           <div className="p-5 border-b border-[#22222e]">
             <CardTitle>Month-over-Month Category Changes</CardTitle>

@@ -87,7 +87,7 @@ export function FeatureHighlights() {
 
   return (
     <div id="features" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-24">
-      {/* Features Grid */}
+
       <div>
         <div className="text-center max-w-2xl mx-auto mb-12">
           <Badge variant="purple" className="mb-2">
@@ -117,7 +117,7 @@ export function FeatureHighlights() {
         </div>
       </div>
 
-      {/* How it works */}
+
       <div id="how-it-works" className="rounded-3xl border border-[#22222e] bg-[#121218]/50 p-8 sm:p-12">
         <div className="text-center max-w-xl mx-auto mb-10">
           <Badge variant="purple" className="mb-2">
@@ -159,7 +159,7 @@ export function FeatureHighlights() {
         </div>
       </div>
 
-      {/* FAQ */}
+
       <div id="faq" className="max-w-3xl mx-auto">
         <div className="text-center mb-10">
           <h2 className="text-2xl sm:text-3xl font-bold text-white">Frequently Asked Questions</h2>

@@ -63,7 +63,7 @@ export default function BudgetsPage() {
     }
   };
 
-  // Aggregations
+
   const totalBudgeted = budgets.reduce((acc, b) => acc + Number(b.amount), 0);
   const totalSpent = budgets.reduce((acc, b) => acc + (b.spent || 0), 0);
   const totalRemaining = Math.max(0, totalBudgeted - totalSpent);
@@ -71,7 +71,7 @@ export default function BudgetsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Monthly Budgets</h2>
@@ -100,7 +100,7 @@ export default function BudgetsPage() {
         </div>
       </div>
 
-      {/* Overall Budget Meter Card */}
+
       <Card className="p-6 bg-[#121218] border-[#22222e]">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-1">
@@ -147,7 +147,7 @@ export default function BudgetsPage() {
         </div>
       </Card>
 
-      {/* Category Budgets Grid */}
+
       {isLoading ? (
         <div className="flex h-64 items-center justify-center">
           <div className="h-6 w-6 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
@@ -167,7 +167,7 @@ export default function BudgetsPage() {
                 className="p-5 bg-[#121218] border-[#22222e] hover:border-purple-500/40 transition-all flex flex-col justify-between"
               >
                 <div>
-                  {/* Card Header */}
+
                   <div className="flex items-center justify-between pb-3 border-b border-[#22222e]">
                     <div className="flex items-center gap-2">
                       <span
@@ -186,7 +186,7 @@ export default function BudgetsPage() {
                     </Badge>
                   </div>
 
-                  {/* Amounts */}
+
                   <div className="my-4 space-y-1">
                     <div className="flex items-baseline justify-between">
                       <span className="text-xs text-slate-400">Spent:</span>
@@ -214,7 +214,7 @@ export default function BudgetsPage() {
                     </div>
                   </div>
 
-                  {/* Progress Bar */}
+
                   <div className="space-y-1">
                     <div className="w-full bg-[#1c1c28] h-2 rounded-full overflow-hidden">
                       <div
@@ -228,7 +228,7 @@ export default function BudgetsPage() {
                   </div>
                 </div>
 
-                {/* Footer Controls */}
+
                 <div className="flex items-center justify-end gap-2 pt-3 mt-3 border-t border-[#22222e]">
                   <button
                     onClick={() => {
@@ -266,7 +266,7 @@ export default function BudgetsPage() {
         </Card>
       )}
 
-      {/* Set Budget Modal */}
+
       <SetBudgetModal
         isOpen={isModalOpen}
         onClose={() => {

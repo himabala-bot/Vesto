@@ -39,20 +39,20 @@ export default function SettingsPage() {
   const { user, updateUserProfile, refreshUser } = useAuth();
   const { setCurrencySymbol } = useMonth();
 
-  // Financial baseline state
+
   const [currency, setCurrency] = useState('USD');
   const [monthlyIncomeTarget, setMonthlyIncomeTarget] = useState('0.00');
   const [monthlySavingsTarget, setMonthlySavingsTarget] = useState('0.00');
   const [isSavingProfile, setIsSavingProfile] = useState(false);
 
-  // Category manager state
+
   const [categories, setCategories] = useState<Category[]>([]);
   const [newCatName, setNewCatName] = useState('');
   const [newCatType, setNewCatType] = useState<'expense' | 'income'>('expense');
   const [newCatColor, setNewCatColor] = useState('#10b981');
   const [isAddingCategory, setIsAddingCategory] = useState(false);
 
-  // Password state
+
   const [oldPassword, setOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [isChangingPassword, setIsChangingPassword] = useState(false);
@@ -159,7 +159,7 @@ export default function SettingsPage() {
 
   return (
     <div className="space-y-8 max-w-4xl">
-      {/* Header */}
+
       <div>
         <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white flex items-center gap-2">
           <SettingsIcon className="h-6 w-6 text-emerald-400" />
@@ -170,7 +170,7 @@ export default function SettingsPage() {
         </p>
       </div>
 
-      {/* Financial Preferences Card */}
+
       <Card className="p-6 bg-slate-900/80 border-slate-800 space-y-6">
         <div className="pb-4 border-b border-slate-800/80">
           <CardTitle>Financial Profile & Baseline</CardTitle>
@@ -221,7 +221,7 @@ export default function SettingsPage() {
         </form>
       </Card>
 
-      {/* Custom Category Manager */}
+
       <Card className="p-6 bg-slate-900/80 border-slate-800 space-y-6">
         <div className="pb-4 border-b border-slate-800/80">
           <CardTitle>Category Manager</CardTitle>
@@ -230,7 +230,7 @@ export default function SettingsPage() {
           </CardDescription>
         </div>
 
-        {/* Add Category Form */}
+
         <form onSubmit={handleAddCategory} className="grid grid-cols-1 sm:grid-cols-12 gap-3 items-end">
           <div className="sm:col-span-5">
             <Input
@@ -279,7 +279,7 @@ export default function SettingsPage() {
           </div>
         </form>
 
-        {/* Category List Pills */}
+
         <div className="space-y-3 pt-2">
           <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
             Your Active Categories ({categories.length})
@@ -311,7 +311,7 @@ export default function SettingsPage() {
         </div>
       </Card>
 
-      {/* Security & Password */}
+
       <Card className="p-6 bg-slate-900/80 border-slate-800 space-y-6">
         <div className="pb-4 border-b border-slate-800/80">
           <CardTitle>Account Security</CardTitle>

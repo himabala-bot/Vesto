@@ -19,7 +19,7 @@ class VestoBackendTests(TestCase):
             password='testpassword123',
             first_name='Alex'
         )
-        # Obtain JWT token
+
         response = self.client.post('/api/auth/login/', {
             'username': 'testuser',
             'password': 'testpassword123'
@@ -47,7 +47,7 @@ class VestoBackendTests(TestCase):
         self.assertEqual(metrics['safe_to_spend']['status'], 'unconfigured')
 
     def test_transaction_crud_and_balance_update(self):
-        # Create income transaction
+
         income_cat = Category.objects.filter(user=self.user, type='income').first()
         res = self.client.post('/api/transactions/', {
             'category': income_cat.id,
@@ -58,7 +58,7 @@ class VestoBackendTests(TestCase):
         })
         self.assertEqual(res.status_code, status.HTTP_201_CREATED)
 
-        # Create expense transaction
+
         exp_cat = Category.objects.filter(user=self.user, type='expense').first()
         res_exp = self.client.post('/api/transactions/', {
             'category': exp_cat.id,
@@ -69,7 +69,7 @@ class VestoBackendTests(TestCase):
         })
         self.assertEqual(res_exp.status_code, status.HTTP_201_CREATED)
 
-        # Check dashboard API
+
         res_dash = self.client.get('/api/analytics/dashboard/?month=2026-08')
         self.assertEqual(res_dash.status_code, status.HTTP_200_OK)
         data = res_dash.data
@@ -89,13 +89,13 @@ class VestoBackendTests(TestCase):
             frequency='monthly',
             due_day=10
         )
-        
+
         res = self.client.post(f'/api/recurring/{recurring.id}/log_payment/', {
             'date': '2026-08-10'
         })
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        
-        # Verify transaction created
+
+
         tx = Transaction.objects.filter(user=self.user, description__contains='Gym Membership').first()
         self.assertIsNotNone(tx)
         self.assertEqual(tx.amount, Decimal('45.00'))
@@ -108,13 +108,13 @@ class VestoBackendTests(TestCase):
             current_amount=Decimal('1000.00'),
             target_date=date(2026, 12, 31)
         )
-        
+
         res = self.client.post(f'/api/goals/{goal.id}/contribute/', {
             'amount': '500.00',
             'notes': 'August bonus contribution'
         })
         self.assertEqual(res.status_code, status.HTTP_200_OK)
-        
+
         goal.refresh_from_db()
         self.assertEqual(goal.current_amount, Decimal('1500.00'))
         self.assertEqual(goal.progress_percentage, 15.0)

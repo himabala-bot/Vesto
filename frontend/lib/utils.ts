@@ -12,7 +12,7 @@ export function formatCurrency(amount: number | string | null | undefined, symbo
   const num = Number(amount);
   const isNegative = num < 0;
   const absNum = Math.abs(num);
-  
+
   const formatted = absNum.toLocaleString('en-IN', {
     minimumFractionDigits: 2,
     maximumFractionDigits: 2,
@@ -81,7 +81,7 @@ export function formatMonthLabel(monthStr: string): string {
 export function getMonthOptions(): { value: string; label: string }[] {
   const options = [];
   const now = new Date();
-  
+
   for (let i = -11; i <= 2; i++) {
     const d = new Date(now.getFullYear(), now.getMonth() + i, 1);
     const value = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}`;

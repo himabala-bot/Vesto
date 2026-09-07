@@ -34,29 +34,29 @@ def calculate_dashboard_metrics(user, month_str=None):
     selected_month_str = f"{year:04d}-{month:02d}"
     today = timezone.now().date()
 
-    # User profile & preferences
+
     profile, _ = UserProfile.objects.get_or_create(user=user)
     currency_symbol = profile.currency_symbol or '₹'
     currency = profile.currency or 'INR'
 
-    # 1. Total Cumulative All-Time Balance (including all previous months)
+
     all_time_income = Transaction.objects.filter(user=user, type='income').aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
     all_time_expense = Transaction.objects.filter(user=user, type='expense').aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
     all_time_balance = all_time_income - all_time_expense
 
-    # 2. Selected Month Transactions & Totals
+
     month_txs = Transaction.objects.filter(user=user, date__gte=start_date, date__lte=end_date)
     month_income = month_txs.filter(type='income').aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
     month_expense = month_txs.filter(type='expense').aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
     month_net_savings = month_income - month_expense
 
-    # Savings rate %
+
     if month_income > Decimal('0.00'):
         savings_rate = round(float((month_net_savings / month_income) * Decimal('100.0')), 1)
     else:
         savings_rate = 0.0
 
-    # 3. Recurring Expenses committed for the month
+
     recurring_qs = RecurringExpense.objects.filter(user=user, is_active=True)
     total_recurring_monthly = Decimal('0.00')
     for r in recurring_qs:
@@ -68,19 +68,18 @@ def calculate_dashboard_metrics(user, month_str=None):
             total_recurring_monthly += r.amount / Decimal('12.0')
     total_recurring_monthly = round(total_recurring_monthly, 2)
 
-    # 4. Total Budgeted for month
+
     budgets_qs = Budget.objects.filter(user=user, month=selected_month_str)
     total_budgeted = budgets_qs.aggregate(total=Sum('amount'))['total'] or Decimal('0.00')
 
-    # 5. Monthly Savings Target
+
     monthly_savings_target = profile.monthly_savings_target or Decimal('0.00')
 
-    # 6. Safe to Spend Engine Calculation
-    # Determine base income pool
+
     effective_income = month_income if month_income > Decimal('0.00') else profile.monthly_income_target
     has_financial_baseline = (effective_income > Decimal('0.00') or month_expense > Decimal('0.00') or total_recurring_monthly > Decimal('0.00'))
 
-    # Remaining days in selected month
+
     if today.year == year and today.month == month:
         remaining_days = max(1, days_in_month - today.day + 1)
         days_passed = today.day
@@ -91,18 +90,16 @@ def calculate_dashboard_metrics(user, month_str=None):
         remaining_days = days_in_month
         days_passed = 0
 
-    # Discretionary budget allocation
-    # Discretionary Total Pool = Income - Committed Recurring - Savings Target
+
     discretionary_pool = max(Decimal('0.00'), effective_income - total_recurring_monthly - monthly_savings_target)
-    
-    # Safe to Spend Month Remaining
-    # If the user has set specific category budgets, we also consider overall spend vs pool
+
+
     safe_to_spend_month = max(Decimal('0.00'), discretionary_pool - month_expense)
-    
+
     safe_to_spend_daily = round(safe_to_spend_month / Decimal(str(remaining_days)), 2)
     safe_to_spend_weekly = round(min(safe_to_spend_month, safe_to_spend_daily * Decimal('7.0')), 2)
 
-    # Health / Pacing Status
+
     if not has_financial_baseline and month_txs.count() == 0:
         pacing_status = 'unconfigured'
         pacing_message = 'Add your income or transactions to calculate your Safe to Spend.'
@@ -119,14 +116,14 @@ def calculate_dashboard_metrics(user, month_str=None):
         pacing_status = 'on_track'
         pacing_message = f'You are on track! You can safely spend {currency_symbol}{float(safe_to_spend_daily):,.2f} per day.'
 
-    # 7. Category Spend vs Budgets for selected month
+
     categories_qs = Category.objects.filter(Q(user=user) | Q(user__isnull=True), type='expense').distinct()
     spending_by_category = []
-    
-    # Pre-fetch budgets map
+
+
     budget_map = {b.category_id: b.amount for b in budgets_qs}
-    
-    # Category expense totals
+
+
     cat_expenses = (
         Transaction.objects.filter(user=user, type='expense', date__gte=start_date, date__lte=end_date)
         .values('category_id', 'category__name', 'category__color', 'category__icon')
@@ -141,7 +138,7 @@ def calculate_dashboard_metrics(user, month_str=None):
         cat_icon = ce['category__icon'] or 'tag'
         spent = ce['total'] or Decimal('0.00')
         budget_amt = budget_map.get(cat_id, Decimal('0.00'))
-        
+
         pct = round(float((spent / budget_amt) * 100), 1) if budget_amt > Decimal('0.00') else 0.0
         remaining_cat = max(Decimal('0.00'), budget_amt - spent) if budget_amt > Decimal('0.00') else Decimal('0.00')
 
@@ -156,14 +153,14 @@ def calculate_dashboard_metrics(user, month_str=None):
             'percentage': pct,
         })
 
-    # 8. Upcoming Recurring Bills in this month
+
     upcoming_recurring = []
     for r in recurring_qs.order_by('due_day'):
         try:
             bill_date = date(year, month, min(r.due_day, days_in_month))
         except ValueError:
             bill_date = date(year, month, days_in_month)
-        
+
         is_paid = r.last_logged_date is not None and (r.last_logged_date.year == year and r.last_logged_date.month == month)
         days_away = (bill_date - today).days if today.year == year and today.month == month else 0
 
@@ -179,7 +176,7 @@ def calculate_dashboard_metrics(user, month_str=None):
             'category_name': r.category.name if r.category else 'Bill',
         })
 
-    # 9. Active Savings Goals
+
     goals_qs = SavingsGoal.objects.filter(user=user).order_by('-created_at')[:4]
     goals_preview = []
     for g in goals_qs:
@@ -195,7 +192,7 @@ def calculate_dashboard_metrics(user, month_str=None):
             'is_completed': g.is_completed,
         })
 
-    # 10. Recent Transactions (last 6)
+
     recent_txs_qs = Transaction.objects.filter(user=user).select_related('category')[:6]
     recent_transactions = []
     for tx in recent_txs_qs:
@@ -210,10 +207,10 @@ def calculate_dashboard_metrics(user, month_str=None):
             'category_icon': tx.category.icon if tx.category else 'tag',
         })
 
-    # 11. Cashflow Comparison Data (Last 6 months trend for chart)
+
     cashflow_trend = []
     for i in range(5, -1, -1):
-        # Calculate past month offset
+
         month_offset_date = (start_date.replace(day=1) - timedelta(days=i * 28)).replace(day=1)
         m_year, m_month = month_offset_date.year, month_offset_date.month
         m_days = calendar.monthrange(m_year, m_month)[1]
@@ -275,12 +272,12 @@ def calculate_detailed_insights(user, month_str=None):
     profile, _ = UserProfile.objects.get_or_create(user=user)
     currency_symbol = profile.currency_symbol or '₹'
 
-    # Current month data
+
     current_txs = Transaction.objects.filter(user=user, date__gte=start_date, date__lte=end_date)
     current_income = current_txs.filter(type='income').aggregate(t=Sum('amount'))['t'] or Decimal('0.00')
     current_expense = current_txs.filter(type='expense').aggregate(t=Sum('amount'))['t'] or Decimal('0.00')
 
-    # Previous month data
+
     prev_month_end = start_date - timedelta(days=1)
     prev_year, prev_month = prev_month_end.year, prev_month_end.month
     prev_days = calendar.monthrange(prev_year, prev_month)[1]
@@ -290,13 +287,13 @@ def calculate_detailed_insights(user, month_str=None):
     prev_income = prev_txs.filter(type='income').aggregate(t=Sum('amount'))['t'] or Decimal('0.00')
     prev_expense = prev_txs.filter(type='expense').aggregate(t=Sum('amount'))['t'] or Decimal('0.00')
 
-    # Spending MoM Change %
+
     if prev_expense > Decimal('0.00'):
         expense_mom_change_pct = round(float(((current_expense - prev_expense) / prev_expense) * 100), 1)
     else:
         expense_mom_change_pct = 0.0
 
-    # Day-by-day spending velocity for the month
+
     velocity_data = []
     current_running_sum = Decimal('0.00')
     prev_running_sum = Decimal('0.00')
@@ -329,7 +326,7 @@ def calculate_detailed_insights(user, month_str=None):
             'previous_month': prev_val,
         })
 
-    # Category Breakdown with comparison
+
     category_insights = []
     cat_expenses = (
         current_txs.filter(type='expense')
@@ -344,7 +341,7 @@ def calculate_detailed_insights(user, month_str=None):
         total = ce['total'] or Decimal('0.00')
         pct_of_total = round(float((total / current_expense) * 100), 1) if current_expense > Decimal('0.00') else 0.0
 
-        # Prior month in this category
+
         prev_cat_total = (
             prev_txs.filter(type='expense', category_id=cat_id).aggregate(t=Sum('amount'))['t'] or Decimal('0.00')
         )
@@ -363,9 +360,9 @@ def calculate_detailed_insights(user, month_str=None):
             'mom_change_percentage': mom_pct,
         })
 
-    # Rule-Based Smart Observations
+
     smart_alerts = []
-    
+
     if current_txs.count() == 0:
         smart_alerts.append({
             'type': 'info',
@@ -375,7 +372,7 @@ def calculate_detailed_insights(user, month_str=None):
             'action_link': '/transactions'
         })
     else:
-        # Savings Rate check
+
         if current_income > Decimal('0.00'):
             savings_pct = round(float(((current_income - current_expense) / current_income) * 100), 1)
             if savings_pct >= 20.0:
@@ -397,7 +394,7 @@ def calculate_detailed_insights(user, month_str=None):
                     'description': f'Expenses have exceeded income by {currency_symbol}{float(current_expense - current_income):,.2f}. Review upcoming payments and non-essential spending.',
                 })
 
-        # Top Category Alert
+
         if category_insights:
             top_cat = category_insights[0]
             if top_cat['percentage'] > 35.0:
@@ -407,7 +404,7 @@ def calculate_detailed_insights(user, month_str=None):
                     'description': f'{top_cat["name"]} accounts for {top_cat["percentage"]}% of your total outflow this month ({currency_symbol}{top_cat["amount"]:,.2f}).',
                 })
 
-        # Spending MoM alert
+
         if prev_expense > Decimal('0.00'):
             if expense_mom_change_pct > 25.0:
                 smart_alerts.append({

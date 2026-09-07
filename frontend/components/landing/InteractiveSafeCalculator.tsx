@@ -8,20 +8,20 @@ import { Sparkles, ArrowRight, CheckCircle2, AlertTriangle, ShieldCheck, IndianR
 import Link from 'next/link';
 
 export function InteractiveSafeCalculator() {
-  // State for interactive calculator without login
+
   const [income, setIncome] = useState<number>(75000);
   const [fixedBills, setFixedBills] = useState<number>(25000);
   const [savingsTarget, setSavingsTarget] = useState<number>(15000);
   const [spentSoFar, setSpentSoFar] = useState<number>(12000);
   const [daysRemaining, setDaysRemaining] = useState<number>(14);
 
-  // Calculations
+
   const discretionaryPool = Math.max(0, income - fixedBills - savingsTarget);
   const remainingDiscretionary = Math.max(0, discretionaryPool - spentSoFar);
   const dailySafeSpend = daysRemaining > 0 ? (remainingDiscretionary / daysRemaining) : 0;
   const weeklySafeSpend = Math.min(remainingDiscretionary, dailySafeSpend * 7);
 
-  // Pacing status
+
   let status: 'safe' | 'caution' | 'danger' = 'safe';
   if (spentSoFar > discretionaryPool) {
     status = 'danger';
@@ -47,7 +47,7 @@ export function InteractiveSafeCalculator() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        {/* Left Inputs Card */}
+
         <Card className="lg:col-span-7 bg-[#121218] border-[#22222e] p-6 sm:p-8 space-y-6">
           <div className="flex items-center justify-between border-b border-[#22222e] pb-4">
             <h3 className="text-base font-semibold text-slate-100 flex items-center gap-2">
@@ -57,7 +57,7 @@ export function InteractiveSafeCalculator() {
             <span className="text-xs text-slate-400">Adjust sliders or numbers</span>
           </div>
 
-          {/* Monthly Income */}
+
           <div className="space-y-2">
             <div className="flex justify-between items-center text-xs font-medium">
               <label className="text-slate-300">Expected Monthly Income</label>
@@ -79,7 +79,7 @@ export function InteractiveSafeCalculator() {
             </div>
           </div>
 
-          {/* Fixed Committed Bills (Rent, Utilities, Subscriptions) */}
+
           <div className="space-y-2">
             <div className="flex justify-between items-center text-xs font-medium">
               <label className="text-slate-300">Committed Bills & Recurring (Rent, Utilities, Subscriptions)</label>
@@ -96,7 +96,7 @@ export function InteractiveSafeCalculator() {
             />
           </div>
 
-          {/* Savings Goals Target */}
+
           <div className="space-y-2">
             <div className="flex justify-between items-center text-xs font-medium">
               <label className="text-slate-300">Monthly Savings Goal (Emergency Fund, Investments)</label>
@@ -113,7 +113,7 @@ export function InteractiveSafeCalculator() {
             />
           </div>
 
-          {/* Spent So Far */}
+
           <div className="space-y-2">
             <div className="flex justify-between items-center text-xs font-medium">
               <label className="text-slate-300">Discretionary Spent So Far This Month</label>
@@ -130,7 +130,7 @@ export function InteractiveSafeCalculator() {
             />
           </div>
 
-          {/* Days Remaining */}
+
           <div className="space-y-2">
             <div className="flex justify-between items-center text-xs font-medium">
               <label className="text-slate-300">Days Remaining In Month</label>
@@ -148,7 +148,7 @@ export function InteractiveSafeCalculator() {
           </div>
         </Card>
 
-        {/* Right Output Results Card */}
+
         <div className="lg:col-span-5 space-y-4">
           <Card
             className={`p-6 sm:p-8 bg-[#121218] border transition-all ${
@@ -175,7 +175,7 @@ export function InteractiveSafeCalculator() {
               </Badge>
             </div>
 
-            {/* Big Daily Number */}
+
             <div className="my-4">
               <span className="text-xs font-medium text-slate-400">Your Safe Daily Allowance</span>
               <div className="flex items-baseline gap-2 mt-1">
@@ -189,7 +189,7 @@ export function InteractiveSafeCalculator() {
               </p>
             </div>
 
-            {/* Secondary KPIs */}
+
             <div className="grid grid-cols-2 gap-3 pt-4 border-t border-[#22222e]">
               <div className="rounded-xl bg-[#0b0b10] p-3 border border-[#22222e]">
                 <span className="text-[11px] text-slate-400">This Week</span>
@@ -205,7 +205,7 @@ export function InteractiveSafeCalculator() {
               </div>
             </div>
 
-            {/* Formula Breakdown Details */}
+
             <div className="mt-5 space-y-2 text-xs bg-[#0b0b10]/60 p-3.5 rounded-xl border border-[#22222e]">
               <span className="text-[11px] font-semibold text-slate-400 block mb-1">
                 Behind the Math:
@@ -232,7 +232,7 @@ export function InteractiveSafeCalculator() {
               </div>
             </div>
 
-            {/* CTA */}
+
             <div className="mt-6">
               <Link href="/register" className="w-full">
                 <Button variant="purple" className="w-full">

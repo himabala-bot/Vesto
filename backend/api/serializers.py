@@ -40,7 +40,7 @@ class RegisterSerializer(serializers.ModelSerializer):
         user.set_password(password)
         user.save()
 
-        # Update profile with chosen currency if provided
+
         if hasattr(user, 'profile'):
             user.profile.currency = currency
             user.profile.currency_symbol = currency_symbol
@@ -127,16 +127,16 @@ class RecurringExpenseSerializer(serializers.ModelSerializer):
         from django.utils import timezone
         import datetime
         today = timezone.localdate() if hasattr(timezone, 'localdate') else timezone.now().date()
-        
-        # Calculate next due date if not explicitly set
+
+
         if obj.frequency == 'monthly':
-            # Day in current month
+
             try:
                 target_date = datetime.date(today.year, today.month, min(obj.due_day, 28))
             except ValueError:
                 target_date = datetime.date(today.year, today.month, 28)
             if target_date < today:
-                # Due in next month
+
                 if today.month == 12:
                     target_date = datetime.date(today.year + 1, 1, min(obj.due_day, 28))
                 else:

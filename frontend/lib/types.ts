@@ -46,7 +46,7 @@ export interface Budget {
   category: number;
   category_details?: Category;
   amount: string | number;
-  month: string; // 'YYYY-MM'
+  month: string;
   spent?: number;
   remaining?: number;
   percentage?: number;

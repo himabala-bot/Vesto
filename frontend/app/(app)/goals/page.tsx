@@ -32,7 +32,7 @@ export default function GoalsPage() {
   const [goals, setGoals] = useState<SavingsGoal[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(true);
 
-  // Modals
+
   const [isAddModalOpen, setIsAddModalOpen] = useState<boolean>(false);
   const [editingGoal, setEditingGoal] = useState<SavingsGoal | null>(null);
   const [contributingGoal, setContributingGoal] = useState<SavingsGoal | null>(null);
@@ -66,7 +66,7 @@ export default function GoalsPage() {
     }
   };
 
-  // Aggregations
+
   const totalTarget = goals.reduce((acc, g) => acc + Number(g.target_amount), 0);
   const totalSaved = goals.reduce((acc, g) => acc + Number(g.current_amount), 0);
   const overallProgress = totalTarget > 0 ? Math.min(100, Math.round((totalSaved / totalTarget) * 100)) : 0;
@@ -74,7 +74,7 @@ export default function GoalsPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">Savings Goals</h2>
@@ -96,7 +96,7 @@ export default function GoalsPage() {
         </Button>
       </div>
 
-      {/* Summary KPI Cards */}
+
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card className="p-5 bg-[#121218] border-[#22222e]">
           <span className="text-xs text-slate-400">Total Funds Saved</span>
@@ -123,7 +123,7 @@ export default function GoalsPage() {
         </Card>
       </div>
 
-      {/* Goals Cards Grid */}
+
       {isLoading ? (
         <div className="flex h-64 items-center justify-center">
           <div className="h-6 w-6 animate-spin rounded-full border-2 border-purple-500 border-t-transparent" />
@@ -142,7 +142,7 @@ export default function GoalsPage() {
                 className="p-6 bg-[#121218] border-[#22222e] hover:border-purple-500/40 transition-all flex flex-col justify-between"
               >
                 <div>
-                  {/* Goal Header */}
+
                   <div className="flex items-center justify-between pb-3 border-b border-[#22222e]">
                     <div className="flex items-center gap-2.5">
                       <div
@@ -159,7 +159,7 @@ export default function GoalsPage() {
                     </Badge>
                   </div>
 
-                  {/* Progress & Target Details */}
+
                   <div className="my-5 space-y-2">
                     <div className="flex justify-between items-baseline">
                       <span className="text-xs text-slate-400">Saved:</span>
@@ -194,7 +194,7 @@ export default function GoalsPage() {
                   </div>
                 </div>
 
-                {/* Card Actions */}
+
                 <div className="flex items-center justify-between pt-4 border-t border-[#22222e]">
                   <div className="flex items-center gap-1">
                     <button
@@ -244,7 +244,7 @@ export default function GoalsPage() {
         </Card>
       )}
 
-      {/* Add / Edit Goal Modal */}
+
       <AddGoalModal
         isOpen={isAddModalOpen}
         onClose={() => {
@@ -258,7 +258,7 @@ export default function GoalsPage() {
         editGoal={editingGoal}
       />
 
-      {/* Contribute Funds Modal */}
+
       <ContributeGoalModal
         isOpen={!!contributingGoal}
         onClose={() => setContributingGoal(null)}

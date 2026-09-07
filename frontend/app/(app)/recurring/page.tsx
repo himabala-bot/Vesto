@@ -74,7 +74,7 @@ export default function RecurringPage() {
     }
   };
 
-  // Calculations
+
   const monthlyTotal = recurringList.reduce((acc, r) => {
     const amt = Number(r.amount);
     if (r.frequency === 'monthly') return acc + amt;
@@ -87,7 +87,7 @@ export default function RecurringPage() {
 
   return (
     <div className="space-y-6">
-      {/* Header */}
+
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-white">
@@ -111,7 +111,7 @@ export default function RecurringPage() {
         </Button>
       </div>
 
-      {/* Summary KPI Cards */}
+
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
         <Card className="p-5 bg-[#121218] border-[#22222e]">
           <span className="text-xs text-slate-400">Monthly Committed Total</span>
@@ -138,7 +138,7 @@ export default function RecurringPage() {
         </Card>
       </div>
 
-      {/* Recurring Bills Table / Cards */}
+
       <Card className="p-0 bg-[#121218] border-[#22222e] overflow-hidden">
         {isLoading ? (
           <div className="flex h-64 items-center justify-center">
@@ -242,7 +242,7 @@ export default function RecurringPage() {
         )}
       </Card>
 
-      {/* Add / Edit Recurring Modal */}
+
       <AddRecurringModal
         isOpen={isModalOpen}
         onClose={() => {

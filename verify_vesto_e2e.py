@@ -9,10 +9,10 @@ def make_request(endpoint, method="GET", data=None, token=None):
     headers = {"Content-Type": "application/json"}
     if token:
         headers["Authorization"] = f"Bearer {token}"
-    
+
     body = json.dumps(data).encode("utf-8") if data else None
     req = urllib.request.Request(url, data=body, headers=headers, method=method)
-    
+
     try:
         with urllib.request.urlopen(req) as response:
             res_body = response.read().decode("utf-8")
@@ -24,13 +24,13 @@ def make_request(endpoint, method="GET", data=None, token=None):
 
 def run_tests():
     print("=== STARTING VESTO FULL END-TO-END VERIFICATION ===")
-    
-    # 1. Health Check
+
+
     health, status = make_request("/health/")
     assert health["status"] == "healthy", "Health check failed"
     print("[PASS] Backend API Health check passed.")
-    
-    # 2. Register New User
+
+
     import random
     rand_id = random.randint(1000, 9999)
     reg_data = {
@@ -46,14 +46,14 @@ def run_tests():
     user = res["user"]
     print(f"[PASS] Registered user '{user['username']}' with JWT authentication.")
 
-    # 3. Verify Empty State Dashboard (Zero fake data)
+
     dash, _ = make_request("/analytics/dashboard/?month=2026-08", token=token)
     assert dash["has_data"] == False, "Dashboard should be empty for new users"
     assert dash["all_time_balance"] == 0.0, "Balance should be 0.0"
     assert dash["safe_to_spend"]["status"] == "unconfigured", "Safe to spend should be unconfigured"
     print("[PASS] Verified clean empty state with $0.00 metrics (zero fake data).")
 
-    # 4. Fetch Default Categories
+
     categories_res, _ = make_request("/categories/", token=token)
     categories = categories_res.get("results", categories_res) if isinstance(categories_res, dict) else categories_res
     assert len(categories) > 0, "Default categories should exist"
@@ -62,7 +62,7 @@ def run_tests():
     housing_cat = next((c for c in categories if "Housing" in c["name"]), None)
     print(f"[PASS] Verified {len(categories)} default categories initialized.")
 
-    # 5. Record Income Transaction
+
     inc_tx, _ = make_request("/transactions/", method="POST", data={
         "category": salary_cat["id"] if salary_cat else None,
         "amount": 6500.00,
@@ -72,7 +72,7 @@ def run_tests():
     }, token=token)
     print(f"[PASS] Recorded Income: +$6,500.00 (Tx ID: {inc_tx['id']}).")
 
-    # 6. Verify Dashboard Metrics Update Real-time
+
     dash, _ = make_request("/analytics/dashboard/?month=2026-08", token=token)
     assert dash["has_data"] == True, "Dashboard should now show real data"
     assert dash["all_time_balance"] == 6500.00, f"Expected 6500.00, got {dash['all_time_balance']}"
@@ -81,7 +81,7 @@ def run_tests():
     assert dash["safe_to_spend"]["status"] == "on_track"
     print(f"[PASS] Safe to Spend calculated: Daily Allowance ${dash['safe_to_spend']['safe_daily']}/day on track.")
 
-    # 7. Add Recurring Expense (Rent)
+
     recurring, _ = make_request("/recurring/", method="POST", data={
         "name": "Apartment Rent",
         "amount": 1800.00,
@@ -91,13 +91,13 @@ def run_tests():
     }, token=token)
     print(f"[PASS] Created Recurring Bill: $1,800.00/mo Rent (ID: {recurring['id']}).")
 
-    # 8. Log Payment on Recurring Expense
+
     log_res, _ = make_request(f"/recurring/{recurring['id']}/log_payment/", method="POST", data={
         "date": "2026-08-01"
     }, token=token)
     print("[PASS] Logged recurring payment as real expense transaction.")
 
-    # 9. Set Monthly Budget for Groceries
+
     budget, _ = make_request("/budgets/", method="POST", data={
         "category": grocery_cat["id"] if grocery_cat else categories[0]["id"],
         "amount": 600.00,
@@ -105,7 +105,7 @@ def run_tests():
     }, token=token)
     print(f"[PASS] Set Monthly Budget: $600.00 for Groceries (ID: {budget['id']}).")
 
-    # 10. Create Savings Goal and Contribute Funds
+
     goal, _ = make_request("/goals/", method="POST", data={
         "name": "6-Month Emergency Reserve",
         "target_amount": 10000.00,
@@ -124,7 +124,7 @@ def run_tests():
     assert contrib_res["goal"]["current_amount"] == "2000.00" or contrib_res["goal"]["current_amount"] == 2000.00
     print(f"[PASS] Contributed +$500.00 to Goal. New balance: $2,000.00 (20% reached).")
 
-    # 11. Add an Expense Transaction
+
     exp_tx, _ = make_request("/transactions/", method="POST", data={
         "category": grocery_cat["id"] if grocery_cat else None,
         "amount": 125.50,
@@ -134,14 +134,14 @@ def run_tests():
     }, token=token)
     print(f"[PASS] Recorded Grocery Expense: -$125.50 (Tx ID: {exp_tx['id']}).")
 
-    # 12. Verify Insights Engine
+
     insights, _ = make_request("/analytics/insights/?month=2026-08", token=token)
     assert insights["current_summary"]["income"] == 6500.00
-    assert insights["current_summary"]["expense"] == 2425.50  # 1800 (rent) + 500 (goal) + 125.50 (groceries)
+    assert insights["current_summary"]["expense"] == 2425.50
     assert len(insights["category_insights"]) > 0
     print("[PASS] Insights Engine: verified velocity curve and category distribution.")
 
-    # 13. Create Custom Category in Settings
+
     custom_cat, _ = make_request("/categories/", method="POST", data={
         "name": "Artisan Coffee",
         "type": "expense",
@@ -150,7 +150,7 @@ def run_tests():
     }, token=token)
     print(f"[PASS] Custom Category created: '{custom_cat['name']}' (ID: {custom_cat['id']}).")
 
-    # 14. Final Dashboard Verification
+
     final_dash, _ = make_request("/analytics/dashboard/?month=2026-08", token=token)
     print(f"[PASS] Final All-Time Net Balance: ${final_dash['all_time_balance']:,.2f}")
     print(f"[PASS] Final Month Inflow: ${final_dash['month_summary']['income']:,.2f}")

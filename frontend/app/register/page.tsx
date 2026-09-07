@@ -49,7 +49,7 @@ export default function RegisterPage() {
         currency_symbol: currencySymbol,
       });
     } catch {
-      // toast shown in context
+
     } finally {
       setIsLoading(false);
     }
@@ -58,7 +58,7 @@ export default function RegisterPage() {
   return (
     <div className="min-h-screen flex flex-col justify-center items-center px-4 py-12 bg-slate-950">
       <div className="w-full max-w-md space-y-6">
-        {/* Brand */}
+
         <div className="text-center">
           <Link href="/" className="inline-flex items-center gap-2.5 mb-4">
             <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-emerald-400 to-teal-600 text-slate-950 font-black text-xl shadow-lg shadow-emerald-500/20">
@@ -72,7 +72,7 @@ export default function RegisterPage() {
           </p>
         </div>
 
-        {/* Register Card */}
+
         <Card className="bg-slate-900/90 border-slate-800 p-6 sm:p-8 shadow-xl">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div>

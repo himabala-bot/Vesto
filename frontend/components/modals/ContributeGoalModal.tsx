@@ -46,7 +46,7 @@ export function ContributeGoalModal({
         log_transaction: logTransaction,
       });
 
-      // Check if goal reached 100%
+
       const newAmount = Number(goal.current_amount) + parseFloat(amount);
       if (newAmount >= Number(goal.target_amount)) {
         confetti({

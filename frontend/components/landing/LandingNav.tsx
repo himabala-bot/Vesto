@@ -9,7 +9,7 @@ export function LandingNav() {
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[#22222e] bg-[#08080c]/80 backdrop-blur-md">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        {/* Brand */}
+
         <Link href="/" className="flex items-center gap-2.5">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 via-violet-600 to-indigo-600 text-white font-black shadow-md shadow-purple-600/30 text-lg">
             V
@@ -22,7 +22,7 @@ export function LandingNav() {
           </div>
         </Link>
 
-        {/* Navigation Links */}
+
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-slate-300">
           <a href="#calculator" className="hover:text-purple-400 transition-colors">
             Safe to Spend Calculator
@@ -38,7 +38,7 @@ export function LandingNav() {
           </a>
         </nav>
 
-        {/* CTA Buttons */}
+
         <div className="flex items-center gap-3">
           <Link href="/login">
             <Button variant="ghost" size="sm" className="text-xs">

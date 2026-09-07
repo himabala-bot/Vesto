@@ -115,7 +115,7 @@ export function AddTransactionModal({
       description="Add real cashflow entries to update your Safe to Spend metrics."
     >
       <form onSubmit={handleSubmit} className="space-y-4">
-        {/* Type Toggle */}
+
         <div className="grid grid-cols-2 gap-2 rounded-xl bg-[#0b0b10] p-1 border border-[#22222e]">
           <button
             type="button"
@@ -147,7 +147,7 @@ export function AddTransactionModal({
           </button>
         </div>
 
-        {/* Amount Input */}
+
         <div>
           <Input
             label={`Amount (${currencySymbol})`}
@@ -162,7 +162,7 @@ export function AddTransactionModal({
           />
         </div>
 
-        {/* Description */}
+
         <div>
           <Input
             label="Description"
@@ -173,7 +173,7 @@ export function AddTransactionModal({
           />
         </div>
 
-        {/* Category & Date Grid */}
+
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
           <div>
             <Select
@@ -201,7 +201,7 @@ export function AddTransactionModal({
           </div>
         </div>
 
-        {/* Notes */}
+
         <div>
           <label className="block text-xs font-medium text-slate-300 mb-1.5">Notes (Optional)</label>
           <textarea
@@ -213,7 +213,7 @@ export function AddTransactionModal({
           />
         </div>
 
-        {/* Action Buttons */}
+
         <div className="flex items-center justify-end gap-2 pt-3 border-t border-[#22222e]">
           <Button type="button" variant="outline" size="sm" onClick={onClose}>
             Cancel

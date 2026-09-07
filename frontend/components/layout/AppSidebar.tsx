@@ -34,7 +34,7 @@ export function AppSidebar() {
   return (
     <aside className="hidden lg:flex w-64 flex-col border-r border-[#22222e] bg-[#0b0b10] min-h-screen px-4 py-6 justify-between shrink-0">
       <div>
-        {/* Brand Logo */}
+
         <Link href="/dashboard" className="flex items-center gap-2.5 px-3 mb-8">
           <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-purple-500 via-violet-600 to-indigo-600 text-white font-black shadow-md shadow-purple-600/30 text-lg">
             V
@@ -47,7 +47,7 @@ export function AppSidebar() {
           </div>
         </Link>
 
-        {/* Navigation links */}
+
         <nav className="space-y-1.5">
           {NAV_ITEMS.map((item) => {
             const Icon = item.icon;
@@ -76,7 +76,7 @@ export function AppSidebar() {
         </nav>
       </div>
 
-      {/* User profile & Logout */}
+
       <div className="pt-4 border-t border-[#22222e] space-y-3">
         <div className="flex items-center gap-3 px-2">
           <div className="flex h-9 w-9 items-center justify-center rounded-full bg-purple-500/15 text-purple-300 font-semibold text-xs border border-purple-500/30">
