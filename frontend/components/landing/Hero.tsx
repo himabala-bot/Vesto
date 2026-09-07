@@ -14,12 +14,7 @@ export function Hero() {
 
       <div className="relative mx-auto max-w-5xl px-4 sm:px-6 lg:px-8 text-center">
 
-        <div className="inline-flex items-center gap-2 mb-6">
-          <Badge variant="purple" className="px-3.5 py-1 text-xs">
-            <Sparkles className="h-3.5 w-3.5 text-purple-400" />
-            <span>Modern Personal Finance • Built for Control</span>
-          </Badge>
-        </div>
+
 
 
         <h1 className="text-4xl sm:text-6xl font-extrabold tracking-tight text-white leading-[1.1]">
@@ -55,10 +50,7 @@ export function Hero() {
             <CheckCircle className="h-4 w-4 text-purple-400" />
             <span>Real database tracking (Zero fake data)</span>
           </div>
-          <div className="flex items-center gap-1.5">
-            <Lock className="h-4 w-4 text-purple-400" />
-            <span>JWT Secure & Private</span>
-          </div>
+
           <div className="flex items-center gap-1.5">
             <TrendingUp className="h-4 w-4 text-purple-400" />
             <span>All-time balance & cumulative net worth</span>

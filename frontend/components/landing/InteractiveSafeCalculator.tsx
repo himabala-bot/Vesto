@@ -35,7 +35,7 @@ export function InteractiveSafeCalculator() {
     <section id="calculator" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <div className="text-center max-w-3xl mx-auto mb-12">
         <Badge variant="purple" className="mb-3">
-          <Sparkles className="h-3.5 w-3.5" />
+
           <span>Interactive Calculator • No Sign-Up Needed</span>
         </Badge>
         <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-white">
@@ -151,13 +151,12 @@ export function InteractiveSafeCalculator() {
 
         <div className="lg:col-span-5 space-y-4">
           <Card
-            className={`p-6 sm:p-8 bg-[#121218] border transition-all ${
-              status === 'safe'
+            className={`p-6 sm:p-8 bg-[#121218] border transition-all ${status === 'safe'
                 ? 'border-purple-500/40 safe-glow-purple'
                 : status === 'caution'
-                ? 'border-amber-500/40 safe-glow-amber'
-                : 'border-rose-500/40 safe-glow-rose'
-            }`}
+                  ? 'border-amber-500/40 safe-glow-amber'
+                  : 'border-rose-500/40 safe-glow-rose'
+              }`}
           >
             <div className="flex items-center justify-between mb-4">
               <span className="text-xs uppercase tracking-wider font-semibold text-slate-400">

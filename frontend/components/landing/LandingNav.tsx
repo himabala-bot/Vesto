@@ -33,9 +33,6 @@ export function LandingNav() {
           <a href="#how-it-works" className="hover:text-purple-400 transition-colors">
             How It Works
           </a>
-          <a href="#faq" className="hover:text-purple-400 transition-colors">
-            FAQ
-          </a>
         </nav>
 
 

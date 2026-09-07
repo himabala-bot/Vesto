@@ -66,25 +66,6 @@ export function FeatureHighlights() {
     },
   ];
 
-  const faqs = [
-    {
-      q: 'How is Safe to Spend calculated in Vesto?',
-      a: 'Safe to Spend = (Actual Monthly Income or Target Baseline) minus (Committed Recurring Bills) minus (Monthly Savings Targets) minus (Discretionary Spent so far), divided by remaining days in the month.',
-    },
-    {
-      q: 'Do I get fake or placeholder financial data when I sign up?',
-      a: 'Never. Vesto starts completely clean with intuitive empty states and onboarding prompts. Every metric and chart comes directly from your real database records.',
-    },
-    {
-      q: 'Can I track custom categories and change currency?',
-      a: 'Yes! Vesto supports USD ($), EUR (€), GBP (£), INR (₹), CAD, AUD, and custom categories with customizable color accents.',
-    },
-    {
-      q: 'Can I copy budgets from month to month?',
-      a: 'Yes! On the Budgets page, simply click "Copy from Previous Month" to replicate all category limits with one click.',
-    },
-  ];
-
   return (
     <div id="features" className="py-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto space-y-24">
 
@@ -158,24 +139,6 @@ export function FeatureHighlights() {
           </div>
         </div>
       </div>
-
-
-      <div id="faq" className="max-w-3xl mx-auto">
-        <div className="text-center mb-10">
-          <h2 className="text-2xl sm:text-3xl font-bold text-white">Frequently Asked Questions</h2>
-        </div>
-
-        <div className="space-y-4">
-          {faqs.map((item, i) => (
-            <Card key={i} className="p-5 bg-[#121218] border-[#22222e] hover:border-purple-500/30 transition-colors">
-              <h4 className="text-sm font-semibold text-slate-100 flex items-center justify-between">
-                <span>{item.q}</span>
-              </h4>
-              <p className="mt-2 text-xs text-slate-400 leading-relaxed">{item.a}</p>
-            </Card>
-          ))}
-        </div>
-      </div>
     </div>
   );
 }
@@ -198,8 +161,8 @@ export function LandingFooter() {
           <a href="#features" className="hover:text-purple-400 transition-colors">
             Features
           </a>
-          <a href="#faq" className="hover:text-purple-400 transition-colors">
-            FAQ
+          <a href="#how-it-works" className="hover:text-purple-400 transition-colors">
+            How It Works
           </a>
         </div>
       </div>
