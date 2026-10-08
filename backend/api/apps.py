@@ -12,9 +12,7 @@ class ApiConfig(AppConfig):
         """
         Hook that ensures a superuser exists in production.
         Reads credentials from ADMIN_USERNAME, ADMIN_EMAIL, ADMIN_PASSWORD
-        environment variables. Runs once after migrations and also
-        immediately on app startup (covers the case where no migrations
-        are applied).
+        environment variables. Runs safely after migrations are applied.
         """
         def _create_admin_user(sender, **kwargs):
             username = os.getenv('ADMIN_USERNAME')
@@ -22,22 +20,20 @@ class ApiConfig(AppConfig):
             password = os.getenv('ADMIN_PASSWORD')
             if not all([username, email, password]):
                 return
-            User = get_user_model()
-            if not User.objects.filter(username=username).exists():
-                User.objects.create_superuser(
-                    username=username,
-                    email=email,
-                    password=password,
-                )
-                print("✅ Production admin superuser created.")
-            else:
-                print("ℹ️ Admin superuser already exists.")
-
+            try:
+                User = get_user_model()
+                if not User.objects.filter(username=username).exists():
+                    User.objects.create_superuser(
+                        username=username,
+                        email=email,
+                        password=password,
+                    )
+                    print("✅ Production admin superuser created.")
+                else:
+                    print("ℹ️ Admin superuser already exists.")
+            except Exception as e:
+                print(f"⚠️ Notice: Could not check/create superuser ({e})")
 
         post_migrate.connect(_create_admin_user, sender=self.__class__)
-
-
-        _create_admin_user(sender=self.__class__)
-
 
         import api.signals
